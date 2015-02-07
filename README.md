@@ -1,6 +1,8 @@
 JSON Builders
 =============
 
+[![Build Status](https://travis-ci.org/banjocreek/java-builder-json.svg?branch=master)](https://travis-ci.org/banjocreek/java-builder-json)
+
 JSON builder API. 
 
 Defines a builder kernel and interfaces for mutable and
