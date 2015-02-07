@@ -16,6 +16,11 @@
   </licenses>
   <dependencies>
     <dependency>
+      <groupId>com.banjocreek.riverbed</groupId>
+      <artifactId>riverbed-builder</artifactId>
+      <version>3.0.5</version>
+    </dependency>
+    <dependency>
       <groupId>javax.json</groupId>
       <artifactId>javax.json-api</artifactId>
     </dependency>
@@ -32,6 +37,11 @@
   </dependencies>
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>com.banjocreek.riverbed</groupId>
+        <artifactId>riverbed-builder</artifactId>
+        <version>3.0.5</version>
+      </dependency>
       <dependency>
         <groupId>javax.json</groupId>
         <artifactId>javax.json-api</artifactId>
