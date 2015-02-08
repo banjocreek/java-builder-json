@@ -32,8 +32,7 @@ final class ImmutableJsonObjectBuilder<R, P> extends
         AbstractImmutableMapBuilder<String, JsonObjectOp, R, P> implements
         JObj<R, P> {
 
-    protected ImmutableJsonObjectBuilder(
-            final Function<JsonObject, R> rootConstructor,
+    ImmutableJsonObjectBuilder(final Function<JsonObject, R> rootConstructor,
             final Function<JsonObject, P> parentConstructor) {
         super(m -> rootConstructor.apply(JsonObjectOp.buildObject(m)),
                 m -> parentConstructor.apply(JsonObjectOp.buildObject(m)));
@@ -62,9 +61,9 @@ final class ImmutableJsonObjectBuilder<R, P> extends
 
     @Override
     public JObj<R, JObj<R, P>> object(final String name) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new ImmutableJsonObjectBuilder<>(
+                jobj -> set(name, jobj).build(), jobj -> set(name, jobj));
+
     }
 
     @Override
@@ -104,9 +103,8 @@ final class ImmutableJsonObjectBuilder<R, P> extends
 
     @Override
     public JObj<R, P> set(final String name, final JsonValue value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new ImmutableJsonObjectBuilder<>(this, values(name,
+                JsonObjectOp.of(value)));
     }
 
     @Override

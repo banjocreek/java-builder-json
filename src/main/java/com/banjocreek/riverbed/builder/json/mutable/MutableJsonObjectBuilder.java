@@ -50,9 +50,8 @@ final class MutableJsonObjectBuilder<P> extends
 
     @Override
     public JObj<JObj<P>> object(final String name) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+
+        return new MutableJsonObjectBuilder<>(jobj -> set(name, jobj));
     }
 
     @Override
@@ -92,9 +91,8 @@ final class MutableJsonObjectBuilder<P> extends
 
     @Override
     public JObj<P> set(final String name, final JsonValue value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        values(name, JsonObjectOp.of(value));
+        return this;
     }
 
     @Override

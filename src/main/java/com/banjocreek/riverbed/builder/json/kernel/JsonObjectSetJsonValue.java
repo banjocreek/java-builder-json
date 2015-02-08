@@ -17,31 +17,23 @@
  */
 package com.banjocreek.riverbed.builder.json.kernel;
 
-import java.util.Map;
+import java.util.Objects;
 
-import javax.json.Json;
-import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonValue;
 
-public interface JsonObjectOp {
+final class JsonObjectSetJsonValue implements JsonObjectOp {
 
-    static JsonObject buildObject(final Map<String, JsonObjectOp> values) {
-        final JsonObjectBuilder jbuf = Json.createObjectBuilder();
-        values.forEach((k, op) -> {
-            op.apply(k, jbuf);
-        });
-        return jbuf.build();
+    private final JsonValue value;
+
+    public JsonObjectSetJsonValue(final JsonValue value) {
+        super();
+        this.value = Objects.requireNonNull(value);
     }
 
-    static JsonObjectOp of(final JsonValue value) {
-        return new JsonObjectSetJsonValue(value);
+    @Override
+    public void apply(final String key, final JsonObjectBuilder jbuf) {
+        jbuf.add(key, this.value);
     }
-
-    static JsonObjectOp of(final String value) {
-        return new JsonObjectSetString(value);
-    }
-
-    void apply(String key, JsonObjectBuilder jbuf);
 
 }
