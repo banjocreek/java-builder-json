@@ -38,6 +38,41 @@ public class ImmutableObjectBuilderNestTest {
     }
 
     @Test
+    public void testContinuedObject() {
+
+        /*
+         * given a builder with a completed nested object
+         */
+        // SETUP
+        final String k1 = "key one", k2 = "key two";
+        final String v2 = "Value2";
+        final JObj<?, JsonObject> b1 = this.builder.object(k1).set(k2, v2)
+                .done();
+
+        /*
+         * given an additional key and value
+         */
+        final String k3 = "key three";
+        final String v3 = "Value3";
+
+        /*
+         * when the nested object is continued and modified
+         */
+        final JObj<?, JsonObject> b2 = b1.continueObject(k1).set(k3, v3).done();
+
+        /*
+         * the builder will produce the combination of nested changes
+         */
+        final JsonObject actual = b2.done();
+        final JsonObject expected = Json
+                .createObjectBuilder()
+                .add(k1,
+                        Json.createObjectBuilder().add(k2, v2).add(k3, v3)
+                                .build()).build();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void testNestedObjectBuild() {
 
         /*

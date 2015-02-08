@@ -24,5 +24,29 @@ public interface JObj<P> extends JObjectBuilder<JObj<P>>, MutableBuilder<P> {
 
     JAry<JObj<P>> array(String name);
 
+    /**
+     * Nest an array. If one has already been started at the given path, the
+     * builder continues to operate on it. Otherwise, a new array is operated
+     * upon as with {@link #array(String)}.
+     *
+     * @param name
+     *            key of the array in the current builder.
+     *
+     * @return builder for nested array.
+     */
+    JAry<JObj<P>> continueArray(String name);
+
+    /**
+     * Nest an object. If one has already been started at the given path, the
+     * builder continues to operate on it. Otherwise a new object is operated
+     * upon as with {@link #object(String)}.
+     *
+     * @param name
+     *            key of the object in the current builder.
+     *
+     * @return builder for nested object.
+     */
+    JObj<JObj<P>> continueObject(String name);
+
     JObj<JObj<P>> object(String name);
 }

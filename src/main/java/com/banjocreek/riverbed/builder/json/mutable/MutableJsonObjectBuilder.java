@@ -49,6 +49,20 @@ final class MutableJsonObjectBuilder<P> extends
     }
 
     @Override
+    public JAry<JObj<P>> continueArray(final String name) {
+        // TODO Auto-generated method stub
+        // return null;
+        throw new UnsupportedOperationException("NYI");
+    }
+
+    @Override
+    public JObj<JObj<P>> continueObject(final String name) {
+        // TODO Auto-generated method stub
+        // return null;
+        throw new UnsupportedOperationException("NYI");
+    }
+
+    @Override
     public JObj<JObj<P>> object(final String name) {
 
         return new MutableJsonObjectBuilder<>(jobj -> set(name, jobj));

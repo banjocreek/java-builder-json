@@ -31,17 +31,17 @@ import com.banjocreek.riverbed.builder.map.MapDelta;
 final class ImmutableJsonObjectBuilder<R, P> extends
         AbstractImmutableMapBuilder<String, JsonOp, R, P> implements JObj<R, P> {
 
-    ImmutableJsonObjectBuilder(final Function<JsonObject, R> rootConstructor,
-            final Function<JsonObject, P> parentConstructor) {
-        super(m -> rootConstructor.apply(JsonOp.buildObject(m)),
-                m -> parentConstructor.apply(JsonOp.buildObject(m)));
-    }
-
     private ImmutableJsonObjectBuilder(
             final AbstractImmutableMapBuilder<String, JsonOp, R, P> previous,
             final MapDelta<String, JsonOp> delta) {
         super(previous, delta);
         // TODO Auto-generated constructor stub
+    }
+
+    ImmutableJsonObjectBuilder(final Function<JsonObject, R> rootConstructor,
+            final Function<JsonObject, P> parentConstructor) {
+        super(m -> rootConstructor.apply(JsonOp.buildObject(m)),
+                m -> parentConstructor.apply(JsonOp.buildObject(m)));
     }
 
     @Override
@@ -53,6 +53,20 @@ final class ImmutableJsonObjectBuilder<R, P> extends
 
     @Override
     public JObj<R, P> clear() {
+        // TODO Auto-generated method stub
+        // return null;
+        throw new UnsupportedOperationException("NYI");
+    }
+
+    @Override
+    public JAry<R, JObj<R, P>> continueArray(final String name) {
+        // TODO Auto-generated method stub
+        // return null;
+        throw new UnsupportedOperationException("NYI");
+    }
+
+    @Override
+    public JObj<R, JObj<R, P>> continueObject(final String name) {
         // TODO Auto-generated method stub
         // return null;
         throw new UnsupportedOperationException("NYI");
