@@ -24,14 +24,14 @@ import java.util.function.Function;
 import javax.json.JsonObject;
 import javax.json.JsonValue;
 
-import com.banjocreek.riverbed.builder.json.kernel.JsonObjectOp;
+import com.banjocreek.riverbed.builder.json.kernel.JsonOp;
 import com.banjocreek.riverbed.builder.map.AbstractMutableMapBuilder;
 
 final class MutableJsonObjectBuilder<P> extends
-        AbstractMutableMapBuilder<String, JsonObjectOp, P> implements JObj<P> {
+        AbstractMutableMapBuilder<String, JsonOp, P> implements JObj<P> {
 
     protected MutableJsonObjectBuilder(final Function<JsonObject, P> constructor) {
-        super(m -> constructor.apply(JsonObjectOp.buildObject(m)));
+        super(m -> constructor.apply(JsonOp.buildObject(m)));
     }
 
     @Override
@@ -91,7 +91,7 @@ final class MutableJsonObjectBuilder<P> extends
 
     @Override
     public JObj<P> set(final String name, final JsonValue value) {
-        values(name, JsonObjectOp.of(value));
+        values(name, JsonOp.of(value));
         return this;
     }
 
@@ -104,7 +104,7 @@ final class MutableJsonObjectBuilder<P> extends
 
     @Override
     public JObj<P> set(final String name, final String value) {
-        values(name, JsonObjectOp.of(value));
+        values(name, JsonOp.of(value));
         return this;
     }
 

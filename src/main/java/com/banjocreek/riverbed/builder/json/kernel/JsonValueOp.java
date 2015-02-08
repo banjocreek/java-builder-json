@@ -19,16 +19,22 @@ package com.banjocreek.riverbed.builder.json.kernel;
 
 import java.util.Objects;
 
+import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonValue;
 
-final class JsonObjectSetJsonValue implements JsonObjectOp {
+final class JsonValueOp implements JsonOp {
 
     private final JsonValue value;
 
-    public JsonObjectSetJsonValue(final JsonValue value) {
+    public JsonValueOp(final JsonValue value) {
         super();
         this.value = Objects.requireNonNull(value);
+    }
+
+    @Override
+    public void apply(final JsonArrayBuilder jbuf) {
+        jbuf.add(this.value);
     }
 
     @Override

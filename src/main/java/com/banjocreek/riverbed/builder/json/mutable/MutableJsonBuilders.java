@@ -25,7 +25,7 @@ import javax.json.JsonObject;
 public interface MutableJsonBuilders {
 
     public static JAry<JsonArray> array() {
-        throw new UnsupportedOperationException("NYI");
+        return new MutableJsonArrayBuilder<>(Function.identity());
     }
 
     public static JObj<JsonObject> object() {
