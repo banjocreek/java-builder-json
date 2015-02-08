@@ -15,27 +15,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.banjocreek.riverbed.builder.json;
+package com.banjocreek.riverbed.builder.json.mutable;
+
+import java.util.function.Function;
 
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 
-public interface JBuilders {
+public interface MutableJsonBuilders {
 
-    public static com.banjocreek.riverbed.builder.json.immutable.JAry<JsonArray, JsonArray> immutableArray() {
+    public static JAry<JsonArray> array() {
         throw new UnsupportedOperationException("NYI");
     }
 
-    public static com.banjocreek.riverbed.builder.json.immutable.JObj<JsonObject, JsonObject> immutableObject() {
-        throw new UnsupportedOperationException("NYI");
-    }
-
-    public static com.banjocreek.riverbed.builder.json.mutable.JAry<JsonArray> mutableArray() {
-        throw new UnsupportedOperationException("NYI");
-    }
-
-    public static com.banjocreek.riverbed.builder.json.mutable.JObj<JsonObject> mutableObject() {
-        throw new UnsupportedOperationException("NYI");
+    public static JObj<JsonObject> object() {
+        return new MutableJsonObjectBuilder<>(Function.identity());
     }
 
 }
