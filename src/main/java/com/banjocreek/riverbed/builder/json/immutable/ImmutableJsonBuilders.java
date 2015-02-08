@@ -17,6 +17,8 @@
  */
 package com.banjocreek.riverbed.builder.json.immutable;
 
+import java.util.function.Function;
+
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 
@@ -27,7 +29,8 @@ public interface ImmutableJsonBuilders {
     }
 
     public static JObj<JsonObject, JsonObject> object() {
-        throw new UnsupportedOperationException("NYI");
+        return new ImmutableJsonObjectBuilder<>(Function.identity(),
+                Function.identity());
     }
 
 }

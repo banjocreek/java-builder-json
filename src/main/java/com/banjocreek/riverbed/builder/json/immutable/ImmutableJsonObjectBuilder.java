@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.banjocreek.riverbed.builder.json.mutable;
+package com.banjocreek.riverbed.builder.json.immutable;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -25,114 +25,126 @@ import javax.json.JsonObject;
 import javax.json.JsonValue;
 
 import com.banjocreek.riverbed.builder.json.kernel.JsonObjectOp;
-import com.banjocreek.riverbed.builder.map.AbstractMutableMapBuilder;
+import com.banjocreek.riverbed.builder.map.AbstractImmutableMapBuilder;
+import com.banjocreek.riverbed.builder.map.MapDelta;
 
-final class MutableJsonObjectBuilder<P> extends
-        AbstractMutableMapBuilder<String, JsonObjectOp, P> implements JObj<P> {
+final class ImmutableJsonObjectBuilder<R, P> extends
+        AbstractImmutableMapBuilder<String, JsonObjectOp, R, P> implements
+        JObj<R, P> {
 
-    protected MutableJsonObjectBuilder(final Function<JsonObject, P> constructor) {
-        super(m -> constructor.apply(JsonObjectOp.buildObject(m)));
+    protected ImmutableJsonObjectBuilder(
+            final Function<JsonObject, R> rootConstructor,
+            final Function<JsonObject, P> parentConstructor) {
+        super(m -> rootConstructor.apply(JsonObjectOp.buildObject(m)),
+                m -> parentConstructor.apply(JsonObjectOp.buildObject(m)));
+    }
+
+    private ImmutableJsonObjectBuilder(
+            final AbstractImmutableMapBuilder<String, JsonObjectOp, R, P> previous,
+            final MapDelta<String, JsonObjectOp> delta) {
+        super(previous, delta);
+        // TODO Auto-generated constructor stub
     }
 
     @Override
-    public JAry<JObj<P>> array(final String name) {
+    public JAry<R, JObj<R, P>> array(final String name) {
         // TODO Auto-generated method stub
         // return null;
         throw new UnsupportedOperationException("NYI");
     }
 
     @Override
-    public JObj<P> clear() {
+    public JObj<R, P> clear() {
         // TODO Auto-generated method stub
         // return null;
         throw new UnsupportedOperationException("NYI");
     }
 
     @Override
-    public JObj<JObj<P>> object(final String name) {
+    public JObj<R, JObj<R, P>> object(final String name) {
         // TODO Auto-generated method stub
         // return null;
         throw new UnsupportedOperationException("NYI");
     }
 
     @Override
-    public JObj<P> set(final String name, final BigDecimal value) {
+    public JObj<R, P> set(final String name, final BigDecimal value) {
         // TODO Auto-generated method stub
         // return null;
         throw new UnsupportedOperationException("NYI");
     }
 
     @Override
-    public JObj<P> set(final String name, final BigInteger value) {
+    public JObj<R, P> set(final String name, final BigInteger value) {
         // TODO Auto-generated method stub
         // return null;
         throw new UnsupportedOperationException("NYI");
     }
 
     @Override
-    public JObj<P> set(final String name, final boolean value) {
+    public JObj<R, P> set(final String name, final boolean value) {
         // TODO Auto-generated method stub
         // return null;
         throw new UnsupportedOperationException("NYI");
     }
 
     @Override
-    public JObj<P> set(final String name, final double value) {
+    public JObj<R, P> set(final String name, final double value) {
         // TODO Auto-generated method stub
         // return null;
         throw new UnsupportedOperationException("NYI");
     }
 
     @Override
-    public JObj<P> set(final String name, final int value) {
+    public JObj<R, P> set(final String name, final int value) {
         // TODO Auto-generated method stub
         // return null;
         throw new UnsupportedOperationException("NYI");
     }
 
     @Override
-    public JObj<P> set(final String name, final JsonValue value) {
+    public JObj<R, P> set(final String name, final JsonValue value) {
         // TODO Auto-generated method stub
         // return null;
         throw new UnsupportedOperationException("NYI");
     }
 
     @Override
-    public JObj<P> set(final String name, final long value) {
+    public JObj<R, P> set(final String name, final long value) {
         // TODO Auto-generated method stub
         // return null;
         throw new UnsupportedOperationException("NYI");
     }
 
     @Override
-    public JObj<P> set(final String name, final String value) {
-        values(name, JsonObjectOp.of(value));
-        return this;
+    public JObj<R, P> set(final String name, final String value) {
+        return new ImmutableJsonObjectBuilder<>(this, values(name,
+                JsonObjectOp.of(value)));
     }
 
     @Override
-    public JObj<P> setNull(final String name) {
+    public JObj<R, P> setNull(final String name) {
         // TODO Auto-generated method stub
         // return null;
         throw new UnsupportedOperationException("NYI");
     }
 
     @Override
-    public JObj<P> unset(final String name) {
+    public JObj<R, P> unset(final String name) {
         // TODO Auto-generated method stub
         // return null;
         throw new UnsupportedOperationException("NYI");
     }
 
     @Override
-    public JObj<P> withDefault(final JsonObject jobj) {
+    public JObj<R, P> withDefault(final JsonObject jobj) {
         // TODO Auto-generated method stub
         // return null;
         throw new UnsupportedOperationException("NYI");
     }
 
     @Override
-    public JObj<P> withValues(final JsonObject jobj) {
+    public JObj<R, P> withValues(final JsonObject jobj) {
         // TODO Auto-generated method stub
         // return null;
         throw new UnsupportedOperationException("NYI");
