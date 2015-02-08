@@ -25,16 +25,16 @@ import javax.json.JsonArray;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.banjocreek.riverbed.builder.json.mutable.JAry;
-import com.banjocreek.riverbed.builder.json.mutable.MutableJsonBuilders;
+import com.banjocreek.riverbed.builder.json.immutable.ImmutableJsonBuilders;
+import com.banjocreek.riverbed.builder.json.immutable.JAry;
 
-public class MutableArrayBuilderAddTest {
+public class ImmutableArrayBuilderAddTest {
 
-    private JAry<JsonArray> builder;
+    private JAry<JsonArray, JsonArray> builder;
 
     @Before
     public void setup() {
-        this.builder = MutableJsonBuilders.array();
+        this.builder = ImmutableJsonBuilders.array();
     }
 
     @Test
@@ -49,12 +49,12 @@ public class MutableArrayBuilderAddTest {
         /*
          * when add is invoked with the value
          */
-        this.builder.add(v);
+        final JAry<?, JsonArray> changed = this.builder.add(v);
 
         /*
          * the builder is mutated with the parameters
          */
-        final JsonArray actual = this.builder.merge();
+        final JsonArray actual = changed.done();
         final JsonArray expected = Json.createArrayBuilder().add(v).build();
 
         assertEquals(expected, actual);
