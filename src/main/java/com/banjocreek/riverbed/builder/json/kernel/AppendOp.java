@@ -15,36 +15,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.banjocreek.riverbed.builder.json;
+package com.banjocreek.riverbed.builder.json.kernel;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.util.Objects;
 
 import javax.json.JsonArray;
-import javax.json.JsonValue;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 
-public interface JArrayBuilder<Z extends JArrayBuilder<Z>> {
+public class AppendOp implements JsonOp {
 
-    public Z add(final BigDecimal value);
+    final JsonArray jary;
 
-    public Z add(final BigInteger value);
+    public AppendOp(final JsonArray jary) {
+        this.jary = Objects.requireNonNull(jary);
+    }
 
-    public Z add(final boolean value);
+    @Override
+    public void apply(final JsonArrayBuilder jbuf) {
+        this.jary.forEach(jbuf::add);
+    }
 
-    public Z add(final double value);
-
-    public Z add(final int value);
-
-    public Z add(final JsonValue value);
-
-    public Z add(final long value);
-
-    public Z add(final String value);
-
-    public Z addNull();
-
-    public Z clear();
-
-    public Z concat(JsonArray jary);
+    @Override
+    public void apply(final String key, final JsonObjectBuilder jbuf) {
+        throw new UnsupportedOperationException(
+                "this op applies to arrays only");
+    }
 
 }

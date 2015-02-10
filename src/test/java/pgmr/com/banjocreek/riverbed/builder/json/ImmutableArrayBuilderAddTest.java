@@ -257,4 +257,30 @@ public class ImmutableArrayBuilderAddTest {
 
     }
 
+    @Test
+    public void testConcat() {
+
+        /*
+         * given a builder with values and a completed json array
+         */
+        // SETUP
+        final JAry<JsonArray, JsonArray> b1 = this.builder.add("A").add("B");
+        final JsonArray addl = Json.createArrayBuilder().add("C").add("D")
+                .build();
+
+        /*
+         * when append is invoked
+         */
+        final JAry<?, JsonArray> b2 = b1.concat(addl);
+
+        /*
+         * the additional values are appended to the resulting array
+         */
+        final JsonArray actual = b2.done();
+        final JsonArray expected = Json.createArrayBuilder().add("A").add("B")
+                .add("C").add("D").build();
+        assertEquals(expected, actual);
+
+    }
+
 }

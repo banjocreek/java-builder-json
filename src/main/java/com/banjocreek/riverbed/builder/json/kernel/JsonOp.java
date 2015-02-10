@@ -101,6 +101,10 @@ public interface JsonOp {
         return new StringOp(value);
     }
 
+    static JsonOp ofFlat(final JsonArray jary) {
+        return new AppendOp(jary);
+    }
+
     static JsonOp ofNull() {
         return new NullOp();
     }

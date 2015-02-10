@@ -256,4 +256,31 @@ public class MutableArrayBuilderAddTest {
         assertEquals(expected, actual);
 
     }
+
+    @Test
+    public void testConcat() {
+
+        /*
+         * given a builder with values and a completed json array
+         */
+        // SETUP
+        this.builder.add("A").add("B");
+        final JsonArray addl = Json.createArrayBuilder().add("C").add("D")
+                .build();
+
+        /*
+         * when append is invoked
+         */
+        this.builder.concat(addl);
+
+        /*
+         * the additional values are appended to the resulting array
+         */
+        final JsonArray actual = this.builder.merge();
+        final JsonArray expected = Json.createArrayBuilder().add("A").add("B")
+                .add("C").add("D").build();
+        assertEquals(expected, actual);
+
+    }
+
 }

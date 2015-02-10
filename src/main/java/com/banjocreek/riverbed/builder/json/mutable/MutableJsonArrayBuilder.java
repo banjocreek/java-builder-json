@@ -106,22 +106,14 @@ final class MutableJsonArrayBuilder<P> extends
     }
 
     @Override
+    public JAry<P> concat(final JsonArray jary) {
+        jary.stream().map(JsonOp::of).forEach(this::apply);
+        return this;
+    }
+
+    @Override
     public JObj<JAry<P>> object() {
         return new MutableJsonObjectBuilder<>(this::add);
-    }
-
-    @Override
-    public JAry<P> withDefault(final JsonArray jary) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
-    }
-
-    @Override
-    public JAry<P> withValues(final JsonArray jary) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
     }
 
 }

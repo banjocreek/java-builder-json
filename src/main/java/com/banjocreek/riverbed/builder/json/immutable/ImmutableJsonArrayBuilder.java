@@ -106,23 +106,15 @@ public class ImmutableJsonArrayBuilder<R, P> extends
     }
 
     @Override
+    public JAry<R, P> concat(final JsonArray jary) {
+
+        return new ImmutableJsonArrayBuilder<>(this, JsonOp.ofFlat(jary));
+    }
+
+    @Override
     public JObj<R, JAry<R, P>> object() {
         return new ImmutableJsonObjectBuilder<>(jobj -> add(jobj).build(),
                 this::add);
-    }
-
-    @Override
-    public JAry<R, P> withDefault(final JsonArray jary) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
-    }
-
-    @Override
-    public JAry<R, P> withValues(final JsonArray jary) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
     }
 
 }
