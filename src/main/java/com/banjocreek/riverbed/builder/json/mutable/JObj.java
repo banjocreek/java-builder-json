@@ -20,6 +20,15 @@ package com.banjocreek.riverbed.builder.json.mutable;
 import com.banjocreek.riverbed.builder.MutableBuilder;
 import com.banjocreek.riverbed.builder.json.JObjectBuilder;
 
+/**
+ * <p>
+ * Mutable JSON object builder.
+ * </p>
+ *
+ * @param <P>
+ *            parent build type
+ *
+ */
 public interface JObj<P> extends JObjectBuilder<JObj<P>>, MutableBuilder<P> {
 
     /**

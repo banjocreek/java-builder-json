@@ -20,6 +20,18 @@ package com.banjocreek.riverbed.builder.json.immutable;
 import com.banjocreek.riverbed.builder.ImmutableBuilder;
 import com.banjocreek.riverbed.builder.json.JArrayBuilder;
 
+/**
+ * <p>
+ * Immutable JSON array builder.
+ * </p>
+ *
+ * @param <R>
+ *            root build type
+ *
+ * @param <P>
+ *            parent build type
+ *
+ */
 public interface JAry<R, P> extends JArrayBuilder<JAry<R, P>>,
         ImmutableBuilder<R, P> {
 

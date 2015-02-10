@@ -20,6 +20,15 @@ package com.banjocreek.riverbed.builder.json.mutable;
 import com.banjocreek.riverbed.builder.MutableBuilder;
 import com.banjocreek.riverbed.builder.json.JArrayBuilder;
 
+/**
+ * <p>
+ * Mutable JSON array builder.
+ * </p>
+ *
+ * @param <P>
+ *            parent build type
+ *
+ */
 public interface JAry<P> extends JArrayBuilder<JAry<P>>, MutableBuilder<P> {
 
     /**
