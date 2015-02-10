@@ -42,6 +42,32 @@ public class MutableObjectBuilderOpTest {
     }
 
     @Test
+    public void testClear() {
+
+        /*
+         * given a builder with defaults and values
+         */
+        // SETUP
+        this.builder.withValue(
+                Json.createObjectBuilder().add("b", "BB").add("c", "CC")
+                        .build())
+                .withDefault(
+                        Json.createObjectBuilder().add("a", "A").add("b", "BB")
+                                .build());
+
+        /*
+         * when clear is invoked
+         */
+        this.builder.clear();
+
+        /*
+         * the builder will create an empty instance
+         */
+        assertTrue(this.builder.merge().isEmpty());
+
+    }
+
+    @Test
     public void testDefault() {
 
         /*
@@ -115,6 +141,31 @@ public class MutableObjectBuilderOpTest {
         final JsonObject expected = Json.createObjectBuilder().add(k2, v2)
                 .build();
         assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testReset() {
+
+        /*
+         * given defaults and a builder with the defaults and some other values
+         */
+        // SETUP
+        final JsonObject jdef = Json.createObjectBuilder().add("a", "A")
+                .add("b", "BB").build();
+        this.builder.withValue(
+                Json.createObjectBuilder().add("b", "BB").add("c", "CC")
+                        .build()).withDefault(jdef);
+
+        /*
+         * when reset is invoked
+         */
+        this.builder.reset();
+
+        /*
+         * the builder will create an instance with just the defaults
+         */
+        assertEquals(jdef, this.builder.merge());
 
     }
 

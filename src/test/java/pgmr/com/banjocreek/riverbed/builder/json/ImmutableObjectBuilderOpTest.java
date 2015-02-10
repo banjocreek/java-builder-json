@@ -42,6 +42,32 @@ public class ImmutableObjectBuilderOpTest {
     }
 
     @Test
+    public void testClear() {
+
+        /*
+         * given a builder with defaults and values
+         */
+        // SETUP
+        final JObj<?, JsonObject> b = this.builder.withValue(
+                Json.createObjectBuilder().add("b", "BB").add("c", "CC")
+                        .build())
+                .withDefault(
+                        Json.createObjectBuilder().add("a", "A").add("b", "BB")
+                                .build());
+
+        /*
+         * when clear is invoked
+         */
+        final JObj<?, JsonObject> b1 = b.clear();
+
+        /*
+         * the builder will create an empty instance
+         */
+        assertTrue(b1.done().isEmpty());
+
+    }
+
+    @Test
     public void testDefault() {
 
         /*
@@ -114,6 +140,31 @@ public class ImmutableObjectBuilderOpTest {
         final JsonObject expected = Json.createObjectBuilder().add(k2, v2)
                 .build();
         assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testReset() {
+
+        /*
+         * given defaults and a builder with the defaults and some other values
+         */
+        // SETUP
+        final JsonObject jdef = Json.createObjectBuilder().add("a", "A")
+                .add("b", "BB").build();
+        final JObj<?, JsonObject> b = this.builder.withValue(
+                Json.createObjectBuilder().add("b", "BB").add("c", "CC")
+                        .build()).withDefault(jdef);
+
+        /*
+         * when reset is invoked
+         */
+        final JObj<?, JsonObject> b1 = b.reset();
+
+        /*
+         * the builder will create an instance with just the defaults
+         */
+        assertEquals(jdef, b1.done());
 
     }
 

@@ -43,9 +43,8 @@ final class MutableJsonObjectBuilder<P> extends
 
     @Override
     public JObj<P> clear() {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        doClear();
+        return this;
     }
 
     @Override
@@ -67,6 +66,12 @@ final class MutableJsonObjectBuilder<P> extends
     @Override
     public JObj<P> remove(final String name) {
         doRemove(name);
+        return this;
+    }
+
+    @Override
+    public JObj<P> reset() {
+        doReset();
         return this;
     }
 

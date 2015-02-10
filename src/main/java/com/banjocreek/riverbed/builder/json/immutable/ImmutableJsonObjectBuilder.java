@@ -53,9 +53,7 @@ final class ImmutableJsonObjectBuilder<R, P> extends
 
     @Override
     public JObj<R, P> clear() {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new ImmutableJsonObjectBuilder<>(this, genClear());
     }
 
     @Override
@@ -80,6 +78,11 @@ final class ImmutableJsonObjectBuilder<R, P> extends
     @Override
     public JObj<R, P> remove(final String name) {
         return new ImmutableJsonObjectBuilder<>(this, genRemove(name));
+    }
+
+    @Override
+    public JObj<R, P> reset() {
+        return new ImmutableJsonObjectBuilder<>(this, genReset());
     }
 
     @Override

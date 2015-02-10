@@ -30,6 +30,8 @@ public interface JObjectBuilder<Z extends JObjectBuilder<Z>> {
 
     public Z remove(String name);
 
+    public Z reset();
+
     public Z set(final String name, final BigDecimal value);
 
     public Z set(final String name, final BigInteger value);
