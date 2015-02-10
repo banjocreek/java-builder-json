@@ -19,8 +19,12 @@ package pgmr.com.banjocreek.riverbed.builder.json;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 import javax.json.Json;
 import javax.json.JsonArray;
+import javax.json.JsonValue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +42,199 @@ public class ImmutableArrayBuilderAddTest {
     }
 
     @Test
-    public void testSetString() {
+    public void testAddBigDecimal() {
+
+        /*
+         * given a builder and a value
+         */
+        // SETUP
+        final BigDecimal v = BigDecimal.valueOf(12.3);
+
+        /*
+         * when add is invoked with the value
+         */
+        final JAry<?, JsonArray> changed = this.builder.add(v);
+
+        /*
+         * the builder is mutated with the parameters
+         */
+        final JsonArray actual = changed.done();
+        final JsonArray expected = Json.createArrayBuilder().add(v).build();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testAddBigInteger() {
+
+        /*
+         * given a builder and a value
+         */
+        // SETUP
+        final BigInteger v = BigInteger.valueOf(12L);
+
+        /*
+         * when add is invoked with the value
+         */
+        final JAry<?, JsonArray> changed = this.builder.add(v);
+
+        /*
+         * the builder is mutated with the parameters
+         */
+        final JsonArray actual = changed.done();
+        final JsonArray expected = Json.createArrayBuilder().add(v).build();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testAddBoolean() {
+
+        /*
+         * given a builder and a value
+         */
+        // SETUP
+        final boolean v = true;
+
+        /*
+         * when add is invoked with the value
+         */
+        final JAry<?, JsonArray> changed = this.builder.add(v);
+
+        /*
+         * the builder is mutated with the parameters
+         */
+        final JsonArray actual = changed.done();
+        final JsonArray expected = Json.createArrayBuilder().add(v).build();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testAddDouble() {
+
+        /*
+         * given a builder and a value
+         */
+        // SETUP
+        final double v = 12.3;
+
+        /*
+         * when add is invoked with the value
+         */
+        final JAry<?, JsonArray> changed = this.builder.add(v);
+
+        /*
+         * the builder is mutated with the parameters
+         */
+        final JsonArray actual = changed.done();
+        final JsonArray expected = Json.createArrayBuilder().add(v).build();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testAddInteger() {
+
+        /*
+         * given a builder and a value
+         */
+        // SETUP
+        final int v = 12;
+
+        /*
+         * when add is invoked with the value
+         */
+        final JAry<?, JsonArray> changed = this.builder.add(v);
+
+        /*
+         * the builder is mutated with the parameters
+         */
+        final JsonArray actual = changed.done();
+        final JsonArray expected = Json.createArrayBuilder().add(v).build();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testAddJsonValue() {
+
+        /*
+         * given a builder and a value
+         */
+        // SETUP
+        final JsonValue v = Json.createObjectBuilder().add("key", 12L).build()
+                .get("key");
+
+        /*
+         * when add is invoked with the value
+         */
+        final JAry<?, JsonArray> changed = this.builder.add(v);
+
+        /*
+         * the builder is mutated with the parameters
+         */
+        final JsonArray actual = changed.done();
+        final JsonArray expected = Json.createArrayBuilder().add(v).build();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testAddLong() {
+
+        /*
+         * given a builder and a value
+         */
+        // SETUP
+        final long v = 12L;
+
+        /*
+         * when add is invoked with the value
+         */
+        final JAry<?, JsonArray> changed = this.builder.add(v);
+
+        /*
+         * the builder is mutated with the parameters
+         */
+        final JsonArray actual = changed.done();
+        final JsonArray expected = Json.createArrayBuilder().add(v).build();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testAddNull() {
+
+        /*
+         * given a builder
+         */
+        // SETUP
+
+        /*
+         * when add null is invoked with the value
+         */
+        final JAry<?, JsonArray> changed = this.builder.addNull();
+
+        /*
+         * the builder is mutated with the parameters
+         */
+        final JsonArray actual = changed.done();
+        final JsonArray expected = Json.createArrayBuilder().addNull().build();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testAddString() {
 
         /*
          * given a builder and a value
@@ -60,4 +256,5 @@ public class ImmutableArrayBuilderAddTest {
         assertEquals(expected, actual);
 
     }
+
 }

@@ -41,37 +41,32 @@ final class MutableJsonArrayBuilder<P> extends
 
     @Override
     public JAry<P> add(final BigDecimal value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        apply(JsonOp.of(value));
+        return this;
     }
 
     @Override
     public JAry<P> add(final BigInteger value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        apply(JsonOp.of(value));
+        return this;
     }
 
     @Override
     public JAry<P> add(final boolean value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        apply(JsonOp.of(value));
+        return this;
     }
 
     @Override
     public JAry<P> add(final double value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        apply(JsonOp.of(value));
+        return this;
     }
 
     @Override
     public JAry<P> add(final int value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        apply(JsonOp.of(value));
+        return this;
     }
 
     @Override
@@ -82,9 +77,8 @@ final class MutableJsonArrayBuilder<P> extends
 
     @Override
     public JAry<P> add(final long value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        apply(JsonOp.of(value));
+        return this;
     }
 
     @Override
@@ -95,9 +89,8 @@ final class MutableJsonArrayBuilder<P> extends
 
     @Override
     public JAry<P> addNull() {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        apply(JsonOp.ofNull());
+        return this;
     }
 
     @Override

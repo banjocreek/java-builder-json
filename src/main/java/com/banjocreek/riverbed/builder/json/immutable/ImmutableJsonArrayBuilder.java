@@ -49,37 +49,27 @@ public class ImmutableJsonArrayBuilder<R, P> extends
 
     @Override
     public JAry<R, P> add(final BigDecimal value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new ImmutableJsonArrayBuilder<>(this, JsonOp.of(value));
     }
 
     @Override
     public JAry<R, P> add(final BigInteger value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new ImmutableJsonArrayBuilder<>(this, JsonOp.of(value));
     }
 
     @Override
     public JAry<R, P> add(final boolean value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new ImmutableJsonArrayBuilder<>(this, JsonOp.of(value));
     }
 
     @Override
     public JAry<R, P> add(final double value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new ImmutableJsonArrayBuilder<>(this, JsonOp.of(value));
     }
 
     @Override
     public JAry<R, P> add(final int value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new ImmutableJsonArrayBuilder<>(this, JsonOp.of(value));
     }
 
     @Override
@@ -89,9 +79,7 @@ public class ImmutableJsonArrayBuilder<R, P> extends
 
     @Override
     public JAry<R, P> add(final long value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new ImmutableJsonArrayBuilder<>(this, JsonOp.of(value));
     }
 
     @Override
@@ -101,9 +89,7 @@ public class ImmutableJsonArrayBuilder<R, P> extends
 
     @Override
     public JAry<R, P> addNull() {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new ImmutableJsonArrayBuilder<>(this, JsonOp.ofNull());
     }
 
     @Override
