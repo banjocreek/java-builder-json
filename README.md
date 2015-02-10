@@ -30,6 +30,16 @@ structures by addressing the difficulties above and:
 
 # Usage
 
+## Include Dependencies
+```xml
+<dependency>
+    <groupId>com.banjocreek.riverbed</groupId>
+    <artifactId>riverbed-builder-json</artifactId>
+    <version>${v.jsonbuilder}</version>
+</dependency>
+```
+See [Maven Central](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.banjocreek.riverbed%22%20AND%20a%3A%22riverbed-builder-json%22) for latest version.
+
 
 # Implementation
 
