@@ -39,6 +39,69 @@ public class ImmutableObjectBuilderNestTest {
     }
 
     @Test
+    public void testContinuedArrayBuild() {
+
+        /*
+         * given a builder with a completed nested array
+         */
+        // SETUP
+        final String k1 = "key one";
+        final String v2 = "Value2";
+        final JObj<JsonObject, JsonObject> b1 = this.builder.array(k1).add(v2)
+                .done();
+
+        /*
+         * given an additional value
+         */
+        final String v3 = "Value3";
+
+        /*
+         * when the nested array is continued and modified
+         */
+        final JAry<JsonObject, ?> b2 = b1.continueArray(k1).add(v3);
+
+        /*
+         * the builder will produce the combination of nested changes
+         */
+        final JsonObject actual = b2.build();
+        final JsonObject expected = Json.createObjectBuilder()
+                .add(k1, Json.createArrayBuilder().add(v2).add(v3).build())
+                .build();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testContinuedArrayDone() {
+
+        /*
+         * given a builder with a completed nested array
+         */
+        // SETUP
+        final String k1 = "key one";
+        final String v2 = "Value2";
+        final JObj<?, JsonObject> b1 = this.builder.array(k1).add(v2).done();
+
+        /*
+         * given an additional value
+         */
+        final String v3 = "Value3";
+
+        /*
+         * when the nested array is continued and modified
+         */
+        final JObj<?, JsonObject> b2 = b1.continueArray(k1).add(v3).done();
+
+        /*
+         * the builder will produce the combination of nested changes
+         */
+        final JsonObject actual = b2.done();
+        final JsonObject expected = Json.createObjectBuilder()
+                .add(k1, Json.createArrayBuilder().add(v2).add(v3).build())
+                .build();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void testContinuedObjectBuild() {
 
         /*

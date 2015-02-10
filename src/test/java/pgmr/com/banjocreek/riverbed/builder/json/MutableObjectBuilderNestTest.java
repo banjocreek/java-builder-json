@@ -38,6 +38,37 @@ public class MutableObjectBuilderNestTest {
     }
 
     @Test
+    public void testContinuedArray() {
+
+        /*
+         * given a builder with a completed nested array
+         */
+        // SETUP
+        final String k1 = "key one";
+        final String v2 = "Value2";
+        this.builder.array(k1).add(v2).merge();
+
+        /*
+         * given an additional value
+         */
+        final String v3 = "Value3";
+
+        /*
+         * when the nested object is continued and modified
+         */
+        this.builder.continueArray(k1).add(v3).merge();
+
+        /*
+         * the builder will produce the combination of nested changes
+         */
+        final JsonObject actual = this.builder.merge();
+        final JsonObject expected = Json.createObjectBuilder()
+                .add(k1, Json.createArrayBuilder().add(v2).add(v3).build())
+                .build();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void testContinuedObject() {
 
         /*
