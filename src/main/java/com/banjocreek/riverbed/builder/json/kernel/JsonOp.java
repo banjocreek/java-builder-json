@@ -45,20 +45,18 @@ public interface JsonOp {
 
     static JsonOp combine(final JsonOp origOp, final JsonObject ovr) {
 
-        final JsonObjectOp rval;
-        if (origOp instanceof JsonObjectOp) {
-            rval = new JsonObjectOp((JsonObjectOp) origOp, ovr);
+        final JsonValueOp rval;
+        if (origOp instanceof JsonValueOp) {
+            rval = new JsonValueOp((JsonValueOp) origOp, ovr);
         } else {
-            rval = new JsonObjectOp(ovr);
+            rval = new JsonValueOp(ovr);
         }
         return rval;
 
     }
 
     static JsonOp of(final JsonValue value) {
-
-        return value instanceof JsonObject ? new JsonObjectOp(
-                (JsonObject) value) : new JsonValueOp(value);
+        return new JsonValueOp(value);
     }
 
     static JsonOp of(final String value) {

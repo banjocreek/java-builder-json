@@ -19,7 +19,9 @@ package com.banjocreek.riverbed.builder.json.kernel;
 
 import java.util.Objects;
 
+import javax.json.Json;
 import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonValue;
 
@@ -30,6 +32,19 @@ final class JsonValueOp implements JsonOp {
     public JsonValueOp(final JsonValue value) {
         super();
         this.value = Objects.requireNonNull(value);
+    }
+
+    public JsonValueOp(final JsonValueOp origOp, final JsonObject ovr) {
+
+        final JsonObjectBuilder buf = Json.createObjectBuilder();
+
+        if (origOp.value instanceof JsonObject) {
+            ((JsonObject) origOp.value).forEach(buf::add);
+        }
+        ovr.forEach(buf::add);
+
+        this.value = buf.build();
+
     }
 
     @Override
