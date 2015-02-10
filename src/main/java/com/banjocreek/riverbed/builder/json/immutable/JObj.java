@@ -39,6 +39,9 @@ public interface JObj<R, P> extends JObjectBuilder<JObj<R, P>>,
      * Nest an array. This initializes a new builder whose array will be set in
      * this builder at the given key when it is completed.
      *
+     * @param name
+     *            key at which result will be set.
+     *
      * @return nested array builder.
      */
     JAry<R, JObj<R, P>> array(String name);
@@ -70,6 +73,10 @@ public interface JObj<R, P> extends JObjectBuilder<JObj<R, P>>,
     /**
      * Nest an object. This initializes a new builder whose builder will be set
      * in this builder at the given key when it is completed.
+     *
+     * @param name
+     *            key at which result will be set.
+     *
      *
      * @return nested object builder.
      */
