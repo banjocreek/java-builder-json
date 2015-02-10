@@ -78,55 +78,55 @@ final class ImmutableJsonObjectBuilder<R, P> extends
 
     @Override
     public JObj<R, P> set(final String name, final BigDecimal value) {
-        return new ImmutableJsonObjectBuilder<>(this, values(name,
+        return new ImmutableJsonObjectBuilder<>(this, genValues(name,
                 JsonOp.of(value)));
     }
 
     @Override
     public JObj<R, P> set(final String name, final BigInteger value) {
-        return new ImmutableJsonObjectBuilder<>(this, values(name,
+        return new ImmutableJsonObjectBuilder<>(this, genValues(name,
                 JsonOp.of(value)));
     }
 
     @Override
     public JObj<R, P> set(final String name, final boolean value) {
-        return new ImmutableJsonObjectBuilder<>(this, values(name,
+        return new ImmutableJsonObjectBuilder<>(this, genValues(name,
                 JsonOp.of(value)));
     }
 
     @Override
     public JObj<R, P> set(final String name, final double value) {
-        return new ImmutableJsonObjectBuilder<>(this, values(name,
+        return new ImmutableJsonObjectBuilder<>(this, genValues(name,
                 JsonOp.of(value)));
     }
 
     @Override
     public JObj<R, P> set(final String name, final int value) {
-        return new ImmutableJsonObjectBuilder<>(this, values(name,
+        return new ImmutableJsonObjectBuilder<>(this, genValues(name,
                 JsonOp.of(value)));
     }
 
     @Override
     public JObj<R, P> set(final String name, final JsonValue value) {
-        return new ImmutableJsonObjectBuilder<>(this, values(name,
+        return new ImmutableJsonObjectBuilder<>(this, genValues(name,
                 JsonOp.of(value)));
     }
 
     @Override
     public JObj<R, P> set(final String name, final long value) {
-        return new ImmutableJsonObjectBuilder<>(this, values(name,
+        return new ImmutableJsonObjectBuilder<>(this, genValues(name,
                 JsonOp.of(value)));
     }
 
     @Override
     public JObj<R, P> set(final String name, final String value) {
-        return new ImmutableJsonObjectBuilder<>(this, values(name,
+        return new ImmutableJsonObjectBuilder<>(this, genValues(name,
                 JsonOp.of(value)));
     }
 
     @Override
     public JObj<R, P> setNull(final String name) {
-        return new ImmutableJsonObjectBuilder<>(this, values(name,
+        return new ImmutableJsonObjectBuilder<>(this, genValues(name,
                 JsonOp.ofNull()));
     }
 
@@ -139,13 +139,13 @@ final class ImmutableJsonObjectBuilder<R, P> extends
 
     @Override
     public JObj<R, P> update(final String key, final JsonArray jobj) {
-        return new ImmutableJsonObjectBuilder<>(this, updates(key,
+        return new ImmutableJsonObjectBuilder<>(this, genUpdates(key,
                 jop -> JsonOp.combine(jop, jobj)));
     }
 
     @Override
     public JObj<R, P> update(final String key, final JsonObject jobj) {
-        return new ImmutableJsonObjectBuilder<>(this, updates(key,
+        return new ImmutableJsonObjectBuilder<>(this, genUpdates(key,
                 jop -> JsonOp.combine(jop, jobj)));
     }
 

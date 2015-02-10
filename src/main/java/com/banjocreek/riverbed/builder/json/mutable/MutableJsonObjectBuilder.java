@@ -65,55 +65,55 @@ final class MutableJsonObjectBuilder<P> extends
 
     @Override
     public JObj<P> set(final String name, final BigDecimal value) {
-        values(name, JsonOp.of(value));
+        doValues(name, JsonOp.of(value));
         return this;
     }
 
     @Override
     public JObj<P> set(final String name, final BigInteger value) {
-        values(name, JsonOp.of(value));
+        doValues(name, JsonOp.of(value));
         return this;
     }
 
     @Override
     public JObj<P> set(final String name, final boolean value) {
-        values(name, JsonOp.of(value));
+        doValues(name, JsonOp.of(value));
         return this;
     }
 
     @Override
     public JObj<P> set(final String name, final double value) {
-        values(name, JsonOp.of(value));
+        doValues(name, JsonOp.of(value));
         return this;
     }
 
     @Override
     public JObj<P> set(final String name, final int value) {
-        values(name, JsonOp.of(value));
+        doValues(name, JsonOp.of(value));
         return this;
     }
 
     @Override
     public JObj<P> set(final String name, final JsonValue value) {
-        values(name, JsonOp.of(value));
+        doValues(name, JsonOp.of(value));
         return this;
     }
 
     @Override
     public JObj<P> set(final String name, final long value) {
-        values(name, JsonOp.of(value));
+        doValues(name, JsonOp.of(value));
         return this;
     }
 
     @Override
     public JObj<P> set(final String name, final String value) {
-        values(name, JsonOp.of(value));
+        doValues(name, JsonOp.of(value));
         return this;
     }
 
     @Override
     public JObj<P> setNull(final String name) {
-        values(name, JsonOp.ofNull());
+        doValues(name, JsonOp.ofNull());
         return this;
     }
 
@@ -126,13 +126,13 @@ final class MutableJsonObjectBuilder<P> extends
 
     @Override
     public JObj<P> update(final String key, final JsonArray jobj) {
-        updates(key, jop -> JsonOp.combine(jop, jobj));
+        doUpdates(key, jop -> JsonOp.combine(jop, jobj));
         return this;
     }
 
     @Override
     public JObj<P> update(final String key, final JsonObject jobj) {
-        updates(key, jop -> JsonOp.combine(jop, jobj));
+        doUpdates(key, jop -> JsonOp.combine(jop, jobj));
         return this;
     }
 
