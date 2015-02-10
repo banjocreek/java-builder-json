@@ -119,9 +119,8 @@ final class MutableJsonObjectBuilder<P> extends
 
     @Override
     public JObj<P> unset(final String name) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        doRemove(name);
+        return this;
     }
 
     @Override
