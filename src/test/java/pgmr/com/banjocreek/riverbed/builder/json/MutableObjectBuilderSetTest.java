@@ -62,4 +62,38 @@ public class MutableObjectBuilderSetTest {
         assertEquals(expected, actual);
 
     }
+
+    @Test
+    public void testUpdateObject() {
+
+        /*
+         * given a key and builder with a json object value for the key
+         */
+        final String k = "Key";
+        final JsonObject v = Json.createObjectBuilder().add("a", "A")
+                .add("b", "B").build();
+        this.builder.set(k, v);
+
+        /*
+         * when update is invoked with an overlapping value for the same key
+         */
+        this.builder
+                .update(k,
+                        Json.createObjectBuilder().add("c", "C").add("b", "BB")
+                                .build());
+
+        /*
+         * the builder produces an instance with the combined values at the key,
+         * the second overriding the first.
+         */
+        final JsonObject actual = this.builder.merge();
+        final JsonObject expected = Json
+                .createObjectBuilder()
+                .add(k,
+                        Json.createObjectBuilder().add("a", "A").add("c", "C")
+                                .add("b", "BB").build()).build();
+        assertEquals(expected, actual);
+
+    }
+
 }

@@ -47,6 +47,8 @@ public interface JObjectBuilder<Z extends JObjectBuilder<Z>> {
 
     public Z unset(String name);
 
+    public Z update(final String name, final JsonObject with);
+
     public Z withDefault(JsonObject jobj);
 
     public Z withValues(JsonObject jobj);

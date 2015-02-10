@@ -147,6 +147,12 @@ final class ImmutableJsonObjectBuilder<R, P> extends
     }
 
     @Override
+    public JObj<R, P> update(final String key, final JsonObject jobj) {
+        return new ImmutableJsonObjectBuilder<>(this, updates(key,
+                jop -> JsonOp.combine(jop, jobj)));
+    }
+
+    @Override
     public JObj<R, P> withDefault(final JsonObject jobj) {
         // TODO Auto-generated method stub
         // return null;
@@ -158,11 +164,6 @@ final class ImmutableJsonObjectBuilder<R, P> extends
         // TODO Auto-generated method stub
         // return null;
         throw new UnsupportedOperationException("NYI");
-    }
-
-    private JObj<R, P> update(final String key, final JsonObject jobj) {
-        return new ImmutableJsonObjectBuilder<>(this, updates(key,
-                jop -> JsonOp.combine(jop, jobj)));
     }
 
 }
