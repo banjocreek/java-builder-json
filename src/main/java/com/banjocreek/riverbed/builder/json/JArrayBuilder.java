@@ -41,9 +41,9 @@ public interface JArrayBuilder<Z extends JArrayBuilder<Z>> {
 
     public Z add(final String value);
 
-    public Z clear();
+    public Z addNull();
 
-    public Z setNull();
+    public Z clear();
 
     public Z withDefault(JsonArray jary);
 

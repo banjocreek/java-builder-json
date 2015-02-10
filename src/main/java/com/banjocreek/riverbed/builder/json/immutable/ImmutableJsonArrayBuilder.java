@@ -100,6 +100,13 @@ public class ImmutableJsonArrayBuilder<R, P> extends
     }
 
     @Override
+    public JAry<R, P> addNull() {
+        // TODO Auto-generated method stub
+        // return null;
+        throw new UnsupportedOperationException("NYI");
+    }
+
+    @Override
     public JAry<R, JAry<R, P>> array() {
         return new ImmutableJsonArrayBuilder<>(jary -> add(jary).build(),
                 this::add);
@@ -116,13 +123,6 @@ public class ImmutableJsonArrayBuilder<R, P> extends
     public JObj<R, JAry<R, P>> object() {
         return new ImmutableJsonObjectBuilder<>(jobj -> add(jobj).build(),
                 this::add);
-    }
-
-    @Override
-    public JAry<R, P> setNull() {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
     }
 
     @Override

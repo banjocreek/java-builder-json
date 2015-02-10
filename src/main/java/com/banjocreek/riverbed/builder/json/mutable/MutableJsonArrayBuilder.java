@@ -94,6 +94,13 @@ final class MutableJsonArrayBuilder<P> extends
     }
 
     @Override
+    public JAry<P> addNull() {
+        // TODO Auto-generated method stub
+        // return null;
+        throw new UnsupportedOperationException("NYI");
+    }
+
+    @Override
     public JAry<JAry<P>> array() {
         return new MutableJsonArrayBuilder<>(this::add);
     }
@@ -108,13 +115,6 @@ final class MutableJsonArrayBuilder<P> extends
     @Override
     public JObj<JAry<P>> object() {
         return new MutableJsonObjectBuilder<>(this::add);
-    }
-
-    @Override
-    public JAry<P> setNull() {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
     }
 
     @Override
