@@ -72,6 +72,34 @@ public class MutableObjectBuilderNestTest {
     }
 
     @Test
+    public void testNestedArray() {
+
+        /*
+         * given a builder, key and value
+         */
+        // SETUP
+        final String k1 = "key one";
+        final String v = "Value";
+
+        /*
+         * when a nested array builder is created for the key and the value is
+         * added to the nested builder
+         */
+        this.builder.array(k1).add(v).merge();
+
+        /*
+         * the builder is mutated such that it creates corresponding nested
+         * array in the object.
+         */
+        final JsonObject actual = this.builder.merge();
+        final JsonObject expected = Json.createObjectBuilder()
+                .add(k1, Json.createArrayBuilder().add(v).build()).build();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
     public void testNestedObject() {
 
         /*

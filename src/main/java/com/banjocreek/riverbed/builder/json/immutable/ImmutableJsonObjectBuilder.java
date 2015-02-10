@@ -21,6 +21,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.function.Function;
 
+import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonValue;
 
@@ -41,14 +42,12 @@ final class ImmutableJsonObjectBuilder<R, P> extends
             final AbstractImmutableMapBuilder<String, JsonOp, R, P> previous,
             final MapDelta<String, JsonOp> delta) {
         super(previous, delta);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     public JAry<R, JObj<R, P>> array(final String name) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new ImmutableJsonArrayBuilder<>(jary -> set(name, jary).build(),
+                jary -> set(name, jary));
     }
 
     @Override
@@ -60,15 +59,14 @@ final class ImmutableJsonObjectBuilder<R, P> extends
 
     @Override
     public JAry<R, JObj<R, P>> continueArray(final String name) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new ImmutableJsonArrayBuilder<>(jary -> update(name, jary)
+                .build(), jary -> update(name, jary));
     }
 
     @Override
     public JObj<R, JObj<R, P>> continueObject(final String name) {
-        return new ImmutableJsonObjectBuilder<>(
-                jobj -> set(name, jobj).build(), jobj -> update(name, jobj));
+        return new ImmutableJsonObjectBuilder<>(jobj -> update(name, jobj)
+                .build(), jobj -> update(name, jobj));
     }
 
     @Override
@@ -144,6 +142,12 @@ final class ImmutableJsonObjectBuilder<R, P> extends
         // TODO Auto-generated method stub
         // return null;
         throw new UnsupportedOperationException("NYI");
+    }
+
+    @Override
+    public JObj<R, P> update(final String key, final JsonArray jobj) {
+        return new ImmutableJsonObjectBuilder<>(this, updates(key,
+                jop -> JsonOp.combine(jop, jobj)));
     }
 
     @Override

@@ -43,6 +43,18 @@ public interface JsonOp {
         return jbuf.build();
     }
 
+    static JsonOp combine(final JsonOp origOp, final JsonArray ovr) {
+
+        final JsonValueOp rval;
+        if (origOp instanceof JsonValueOp) {
+            rval = new JsonValueOp((JsonValueOp) origOp, ovr);
+        } else {
+            rval = new JsonValueOp(ovr);
+        }
+        return rval;
+
+    }
+
     static JsonOp combine(final JsonOp origOp, final JsonObject ovr) {
 
         final JsonValueOp rval;

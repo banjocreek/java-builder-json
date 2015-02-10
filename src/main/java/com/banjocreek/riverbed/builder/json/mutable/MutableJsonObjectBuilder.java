@@ -21,6 +21,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.function.Function;
 
+import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonValue;
 
@@ -36,9 +37,7 @@ final class MutableJsonObjectBuilder<P> extends
 
     @Override
     public JAry<JObj<P>> array(final String name) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new MutableJsonArrayBuilder<>(jary -> set(name, jary));
     }
 
     @Override
@@ -50,9 +49,7 @@ final class MutableJsonObjectBuilder<P> extends
 
     @Override
     public JAry<JObj<P>> continueArray(final String name) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new MutableJsonArrayBuilder<>(jary -> update(name, jary));
     }
 
     @Override
@@ -132,6 +129,12 @@ final class MutableJsonObjectBuilder<P> extends
         // TODO Auto-generated method stub
         // return null;
         throw new UnsupportedOperationException("NYI");
+    }
+
+    @Override
+    public JObj<P> update(final String key, final JsonArray jobj) {
+        updates(key, jop -> JsonOp.combine(jop, jobj));
+        return this;
     }
 
     @Override

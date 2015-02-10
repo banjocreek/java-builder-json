@@ -26,6 +26,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.banjocreek.riverbed.builder.json.immutable.ImmutableJsonBuilders;
+import com.banjocreek.riverbed.builder.json.immutable.JAry;
 import com.banjocreek.riverbed.builder.json.immutable.JObj;
 
 public class ImmutableObjectBuilderNestTest {
@@ -38,7 +39,42 @@ public class ImmutableObjectBuilderNestTest {
     }
 
     @Test
-    public void testContinuedObject() {
+    public void testContinuedObjectBuild() {
+
+        /*
+         * given a builder with a completed nested object
+         */
+        // SETUP
+        final String k1 = "key one", k2 = "key two";
+        final String v2 = "Value2";
+        final JObj<JsonObject, JsonObject> b1 = this.builder.object(k1)
+                .set(k2, v2).done();
+
+        /*
+         * given an additional key and value
+         */
+        final String k3 = "key three";
+        final String v3 = "Value3";
+
+        /*
+         * when the nested object is continued and modified
+         */
+        final JObj<JsonObject, ?> b2 = b1.continueObject(k1).set(k3, v3);
+
+        /*
+         * the builder will produce the combination of nested changes
+         */
+        final JsonObject actual = b2.build();
+        final JsonObject expected = Json
+                .createObjectBuilder()
+                .add(k1,
+                        Json.createObjectBuilder().add(k2, v2).add(k3, v3)
+                                .build()).build();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testContinuedObjectDone() {
 
         /*
          * given a builder with a completed nested object
@@ -70,6 +106,63 @@ public class ImmutableObjectBuilderNestTest {
                         Json.createObjectBuilder().add(k2, v2).add(k3, v3)
                                 .build()).build();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testNestedArrayBuild() {
+
+        /*
+         * given a builder, key and value
+         */
+        // SETUP
+        final String k1 = "key one";
+        final String v = "Value";
+
+        /*
+         * when a nested array builder is created for one key and the value is
+         * added to the nested builder
+         */
+        final JAry<JsonObject, ?> changed = this.builder.array(k1).add(v);
+
+        /*
+         * the builder is mutated such that it creates corresponding nested
+         * objects
+         */
+        final JsonObject actual = changed.build();
+        final JsonObject expected = Json.createObjectBuilder()
+                .add(k1, Json.createArrayBuilder().add(v).build()).build();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testNestedArrayDone() {
+
+        /*
+         * given a builder, key and value
+         */
+        // SETUP
+        final String k1 = "key one";
+        final String v = "Value";
+
+        /*
+         * when a nested array builder is created for one key and the value is
+         * added to the nested builder
+         */
+        final JObj<?, JsonObject> changed = this.builder.array(k1).add(v)
+                .done();
+
+        /*
+         * the builder is mutated such that it creates corresponding nested
+         * objects
+         */
+        final JsonObject actual = changed.done();
+        final JsonObject expected = Json.createObjectBuilder()
+                .add(k1, Json.createArrayBuilder().add(v).build()).build();
+
+        assertEquals(expected, actual);
+
     }
 
     @Test
@@ -129,5 +222,4 @@ public class ImmutableObjectBuilderNestTest {
         assertEquals(expected, actual);
 
     }
-
 }
