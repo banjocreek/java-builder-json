@@ -1,49 +1,37 @@
-JSON Builders
-=============
+/**
+ * Copyright (C) Greg Wiley
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License") under
+ * one or more contributor license agreements. See the NOTICE file
+ * distributed with this work for information regarding copyright
+ * ownership. You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package sample.com.banjocreek.riverbed.builder.json;
 
-[![Build Status](https://travis-ci.org/banjocreek/java-builder-json.svg?branch=master)](https://travis-ci.org/banjocreek/java-builder-json)
+import java.util.Objects;
 
-JSON builder API. 
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonObject;
 
-Defines a builder kernel and interfaces for mutable and
-immutable JSON builders.
+import com.banjocreek.riverbed.builder.json.immutable.ImmutableJsonBuilders;
 
+public enum Sample implements Runnable {
 
-# Motivation
+    INTRO_OBJ {
+        @Override
+        public void run() {
 
-The javax.json builders can be difficult to use in some
-cases because:
-
-* They are single use. Once one emits its object, it clears
-  itself.
-* They cannot be nested.
-* They cannot be constructed from existing Json structures.
-
-This module provides an alternative API for building JSON
-structures by addressing the difficulties above and:
-
-* Supporting immutable and mutable builder semantics.
-* Continuation of previously-specified path.
-* Enhancement of previously-specified path.
-* Default object value.
-* Array concatenation.
-
-# Usage
-
-## Include Dependencies
-```xml
-<dependency>
-    <groupId>com.banjocreek.riverbed</groupId>
-    <artifactId>riverbed-builder-json</artifactId>
-    <version>${v.jsonbuilder}</version>
-</dependency>
-```
-See [Maven Central](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.banjocreek.riverbed%22%20AND%20a%3A%22riverbed-builder-json%22) for latest version.
-
-
-## Build an Object
-
-```java
+            // @formatter:off
 final JsonObject jobj = ImmutableJsonBuilders.object()
     .set("Name", "Carl P. Thornton")
     .array("Aliases")
@@ -59,12 +47,16 @@ final JsonObject expected = Json.createObjectBuilder()
 .build();
 
 assert Objects.equals(expected, jobj);
+            // @formatter:on
 
-```
+        }
+    },
 
-## Object Defaults
+    OBJ_DEFAULTS {
+        @Override
+        public void run() {
 
-```java
+            // @formatter:off
 final JsonArray startcmds = ImmutableJsonBuilders.array()
     .add("service tomcat start")
     .add("service nginx start")
@@ -111,24 +103,11 @@ final JsonObject expectedStop = Json
                     .add("service tomcat stop").build())
 .build();
 assert Objects.equals(expectedStop, stop);
-```
+            // @formatter:on
 
-# Implementation
+        }
+    }
 
-This module adapts classes from the javax.json package. Your
-project must include an implementation of javax.json but this
-module does not specify one.
+    ;
 
-The Glassfish imeplementation is used in the tests.
-
-# Versions
-
-While the API is stabilizing, releases will be called 0.x.
-No compatibilities between versions with that pattern can be assumed.
-
-The first release with a stable API will be called 1.x and versions
-released with that pattern will be backward compatible with
-any other 1.x version having smaller x.
-
-
-
+}
