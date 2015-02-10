@@ -77,6 +77,11 @@ final class ImmutableJsonObjectBuilder<R, P> extends
     }
 
     @Override
+    public JObj<R, P> remove(final String name) {
+        return new ImmutableJsonObjectBuilder<>(this, genRemove(name));
+    }
+
+    @Override
     public JObj<R, P> set(final String name, final BigDecimal value) {
         return new ImmutableJsonObjectBuilder<>(this, genValues(name,
                 JsonOp.of(value)));
@@ -128,11 +133,6 @@ final class ImmutableJsonObjectBuilder<R, P> extends
     public JObj<R, P> setNull(final String name) {
         return new ImmutableJsonObjectBuilder<>(this, genValues(name,
                 JsonOp.ofNull()));
-    }
-
-    @Override
-    public JObj<R, P> unset(final String name) {
-        return new ImmutableJsonObjectBuilder<>(this, genRemove(name));
     }
 
     @Override

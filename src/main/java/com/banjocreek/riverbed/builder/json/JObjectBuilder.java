@@ -28,6 +28,8 @@ public interface JObjectBuilder<Z extends JObjectBuilder<Z>> {
 
     public Z clear();
 
+    public Z remove(String name);
+
     public Z set(final String name, final BigDecimal value);
 
     public Z set(final String name, final BigInteger value);
@@ -45,8 +47,6 @@ public interface JObjectBuilder<Z extends JObjectBuilder<Z>> {
     public Z set(final String name, final String value);
 
     public Z setNull(final String name);
-
-    public Z unset(String name);
 
     public Z update(final String name, final JsonArray with);
 

@@ -42,6 +42,32 @@ public class ImmutableObjectBuilderOpTest {
     }
 
     @Test
+    public void testRemove() {
+
+        /*
+         * given keys, values and builder with values at keys
+         */
+        // SETUP
+        final String k1 = "Key1", k2 = "Key2";
+        final String v1 = "Value1", v2 = "Value2";
+        final JObj<?, JsonObject> b = this.builder.set(k1, v1).set(k2, v2);
+        /*
+         * when a key is unset
+         */
+        final JObj<?, JsonObject> b1 = b.remove(k1);
+
+        /*
+         * the builder will emit an instance without the key but with the
+         * others.
+         */
+        final JsonObject actual = b1.done();
+        final JsonObject expected = Json.createObjectBuilder().add(k2, v2)
+                .build();
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
     public void testSetBigDecimal() {
 
         /*
@@ -271,32 +297,6 @@ public class ImmutableObjectBuilderOpTest {
         final JsonObject expected = Json.createObjectBuilder().add(k, v)
                 .build();
 
-        assertEquals(expected, actual);
-
-    }
-
-    @Test
-    public void testUnset() {
-
-        /*
-         * given keys, values and builder with values at keys
-         */
-        // SETUP
-        final String k1 = "Key1", k2 = "Key2";
-        final String v1 = "Value1", v2 = "Value2";
-        final JObj<?, JsonObject> b = this.builder.set(k1, v1).set(k2, v2);
-        /*
-         * when a key is unset
-         */
-        final JObj<?, JsonObject> b1 = b.unset(k1);
-
-        /*
-         * the builder will emit an instance without the key but with the
-         * others.
-         */
-        final JsonObject actual = b1.done();
-        final JsonObject expected = Json.createObjectBuilder().add(k2, v2)
-                .build();
         assertEquals(expected, actual);
 
     }

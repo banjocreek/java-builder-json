@@ -64,6 +64,12 @@ final class MutableJsonObjectBuilder<P> extends
     }
 
     @Override
+    public JObj<P> remove(final String name) {
+        doRemove(name);
+        return this;
+    }
+
+    @Override
     public JObj<P> set(final String name, final BigDecimal value) {
         doValues(name, JsonOp.of(value));
         return this;
@@ -114,12 +120,6 @@ final class MutableJsonObjectBuilder<P> extends
     @Override
     public JObj<P> setNull(final String name) {
         doValues(name, JsonOp.ofNull());
-        return this;
-    }
-
-    @Override
-    public JObj<P> unset(final String name) {
-        doRemove(name);
         return this;
     }
 
