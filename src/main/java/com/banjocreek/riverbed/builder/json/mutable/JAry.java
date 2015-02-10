@@ -20,10 +20,31 @@ package com.banjocreek.riverbed.builder.json.mutable;
 import com.banjocreek.riverbed.builder.MutableBuilder;
 import com.banjocreek.riverbed.builder.json.JArrayBuilder;
 
+/**
+ * <p>
+ * Mutable JSON array builder.
+ * </p>
+ *
+ * @param <P>
+ *            parent build type
+ *
+ */
 public interface JAry<P> extends JArrayBuilder<JAry<P>>, MutableBuilder<P> {
 
+    /**
+     * Nest an array. This initializes a new builder whose array will be
+     * appended to this array when it is completed.
+     *
+     * @return nested array builder.
+     */
     JAry<JAry<P>> array();
 
+    /**
+     * Nest an object. This initializes a new builder whose object will be
+     * appended to this array when it is completed.
+     *
+     * @return nested object builder.
+     */
     JObj<JAry<P>> object();
 
 }

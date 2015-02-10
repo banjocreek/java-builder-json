@@ -22,13 +22,28 @@ import java.util.function.Function;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 
+/**
+ * Factory for immutable JSON builders.
+ */
 public interface ImmutableJsonBuilders {
 
+    /**
+     * Create a new JSON array builder. Both the build and done methods will
+     * produce identical results.
+     *
+     * @return new builder
+     */
     public static JAry<JsonArray, JsonArray> array() {
         return new ImmutableJsonArrayBuilder<>(Function.identity(),
                 Function.identity());
     }
 
+    /**
+     * Create a new JSON object builder. Both the build and done methods will
+     * produce identical results.
+     *
+     * @return new builder
+     */
     public static JObj<JsonObject, JsonObject> object() {
         return new ImmutableJsonObjectBuilder<>(Function.identity(),
                 Function.identity());

@@ -23,8 +23,23 @@ This module provides an alternative API for building JSON
 structures by addressing the difficulties above and:
 
 * Supporting immutable and mutable builder semantics.
-* Augmentation of previously-specified paths.
-* Augmentation of existing JSON objects.
+* Continuation of previously-specified path.
+* Enhancement of previously-specified path.
+* Default object value.
+* Array concatenation.
+
+# Usage
+
+## Include Dependencies
+```xml
+<dependency>
+    <groupId>com.banjocreek.riverbed</groupId>
+    <artifactId>riverbed-builder-json</artifactId>
+    <version>${v.jsonbuilder}</version>
+</dependency>
+```
+See [Maven Central](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.banjocreek.riverbed%22%20AND%20a%3A%22riverbed-builder-json%22) for latest version.
+
 
 # Implementation
 
