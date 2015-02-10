@@ -39,7 +39,7 @@
       <dependency>
         <groupId>com.banjocreek.riverbed</groupId>
         <artifactId>riverbed-builder</artifactId>
-        <version>3.0.6</version>
+        <version>3.0.7</version>
       </dependency>
       <dependency>
         <groupId>javax.json</groupId>
