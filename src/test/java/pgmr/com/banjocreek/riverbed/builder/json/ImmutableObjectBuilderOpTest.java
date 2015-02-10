@@ -42,6 +42,56 @@ public class ImmutableObjectBuilderOpTest {
     }
 
     @Test
+    public void testDefault() {
+
+        /*
+         * given a builder and an object
+         */
+        // SETUP
+        final JsonObject jdef = Json.createObjectBuilder().add("a", "A")
+                .add("b", "B").build();
+
+        /*
+         * when object is used as default
+         */
+        final JObj<?, JsonObject> b = this.builder.withDefault(jdef);
+
+        /*
+         * the created object has the defaults.
+         */
+        assertEquals(jdef, b.done());
+
+    }
+
+    @Test
+    public void testDefaultDoesNotOverrideValue() {
+
+        /*
+         * given a builder with values
+         */
+        // SETUP
+        final JsonObject jval = Json.createObjectBuilder().add("b", "BB")
+                .add("c", "CC").build();
+        final JObj<?, JsonObject> b = this.builder.withValue(jval);
+
+        /*
+         * when overlapping defaults are set
+         */
+        final JObj<?, JsonObject> b1 = b.withDefault(Json.createObjectBuilder()
+                .add("a", "A").add("b", "B").build());
+
+        /*
+         * the builder will create an instance overlapping values taking
+         * precedence.
+         */
+        final JsonObject actual = b1.done();
+        final JsonObject expected = Json.createObjectBuilder().add("a", "A")
+                .add("b", "BB").add("c", "CC").build();
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
     public void testRemove() {
 
         /*
@@ -359,6 +409,28 @@ public class ImmutableObjectBuilderOpTest {
                         Json.createObjectBuilder().add("a", "A").add("c", "C")
                                 .add("b", "BB").build()).build();
         assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testValue() {
+
+        /*
+         * given a builder and an object
+         */
+        // SETUP
+        final JsonObject jval = Json.createObjectBuilder().add("b", "BB")
+                .add("c", "CC").build();
+
+        /*
+         * when object is used as values
+         */
+        final JObj<?, JsonObject> b = this.builder.withValue(jval);
+
+        /*
+         * the created object has the defaults.
+         */
+        assertEquals(jval, b.done());
 
     }
 

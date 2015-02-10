@@ -54,6 +54,6 @@ public interface JObjectBuilder<Z extends JObjectBuilder<Z>> {
 
     public Z withDefault(JsonObject jobj);
 
-    public Z withValues(JsonObject jobj);
+    public Z withValue(JsonObject jobj);
 
 }

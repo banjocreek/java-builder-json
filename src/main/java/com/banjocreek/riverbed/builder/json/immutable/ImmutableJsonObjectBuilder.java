@@ -19,6 +19,7 @@ package com.banjocreek.riverbed.builder.json.immutable;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.HashMap;
 import java.util.function.Function;
 
 import javax.json.JsonArray;
@@ -149,16 +150,16 @@ final class ImmutableJsonObjectBuilder<R, P> extends
 
     @Override
     public JObj<R, P> withDefault(final JsonObject jobj) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        final HashMap<String, JsonOp> defaults = new HashMap<>();
+        jobj.forEach((k, jv) -> defaults.put(k, JsonOp.of(jv)));
+        return new ImmutableJsonObjectBuilder<>(this, genDefaults(defaults));
     }
 
     @Override
-    public JObj<R, P> withValues(final JsonObject jobj) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+    public JObj<R, P> withValue(final JsonObject jobj) {
+        final HashMap<String, JsonOp> values = new HashMap<>();
+        jobj.forEach((k, jv) -> values.put(k, JsonOp.of(jv)));
+        return new ImmutableJsonObjectBuilder<>(this, genValues(values));
     }
 
 }
