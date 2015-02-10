@@ -29,16 +29,16 @@ import javax.json.JsonValue;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.banjocreek.riverbed.builder.json.mutable.JAry;
-import com.banjocreek.riverbed.builder.json.mutable.MutableJsonBuilders;
+import com.banjocreek.riverbed.builder.json.immutable.ImmutableJsonBuilders;
+import com.banjocreek.riverbed.builder.json.immutable.JAry;
 
-public class MutableArrayBuilderAddTest {
+public class ImmutableArrayBuilderOpTest {
 
-    private JAry<JsonArray> builder;
+    private JAry<JsonArray, JsonArray> builder;
 
     @Before
     public void setup() {
-        this.builder = MutableJsonBuilders.array();
+        this.builder = ImmutableJsonBuilders.array();
     }
 
     @Test
@@ -53,12 +53,12 @@ public class MutableArrayBuilderAddTest {
         /*
          * when add is invoked with the value
          */
-        this.builder.add(v);
+        final JAry<?, JsonArray> changed = this.builder.add(v);
 
         /*
          * the builder is mutated with the parameters
          */
-        final JsonArray actual = this.builder.merge();
+        final JsonArray actual = changed.done();
         final JsonArray expected = Json.createArrayBuilder().add(v).build();
 
         assertEquals(expected, actual);
@@ -77,12 +77,12 @@ public class MutableArrayBuilderAddTest {
         /*
          * when add is invoked with the value
          */
-        this.builder.add(v);
+        final JAry<?, JsonArray> changed = this.builder.add(v);
 
         /*
          * the builder is mutated with the parameters
          */
-        final JsonArray actual = this.builder.merge();
+        final JsonArray actual = changed.done();
         final JsonArray expected = Json.createArrayBuilder().add(v).build();
 
         assertEquals(expected, actual);
@@ -101,12 +101,12 @@ public class MutableArrayBuilderAddTest {
         /*
          * when add is invoked with the value
          */
-        this.builder.add(v);
+        final JAry<?, JsonArray> changed = this.builder.add(v);
 
         /*
          * the builder is mutated with the parameters
          */
-        final JsonArray actual = this.builder.merge();
+        final JsonArray actual = changed.done();
         final JsonArray expected = Json.createArrayBuilder().add(v).build();
 
         assertEquals(expected, actual);
@@ -125,12 +125,12 @@ public class MutableArrayBuilderAddTest {
         /*
          * when add is invoked with the value
          */
-        this.builder.add(v);
+        final JAry<?, JsonArray> changed = this.builder.add(v);
 
         /*
          * the builder is mutated with the parameters
          */
-        final JsonArray actual = this.builder.merge();
+        final JsonArray actual = changed.done();
         final JsonArray expected = Json.createArrayBuilder().add(v).build();
 
         assertEquals(expected, actual);
@@ -149,12 +149,12 @@ public class MutableArrayBuilderAddTest {
         /*
          * when add is invoked with the value
          */
-        this.builder.add(v);
+        final JAry<?, JsonArray> changed = this.builder.add(v);
 
         /*
          * the builder is mutated with the parameters
          */
-        final JsonArray actual = this.builder.merge();
+        final JsonArray actual = changed.done();
         final JsonArray expected = Json.createArrayBuilder().add(v).build();
 
         assertEquals(expected, actual);
@@ -174,12 +174,12 @@ public class MutableArrayBuilderAddTest {
         /*
          * when add is invoked with the value
          */
-        this.builder.add(v);
+        final JAry<?, JsonArray> changed = this.builder.add(v);
 
         /*
          * the builder is mutated with the parameters
          */
-        final JsonArray actual = this.builder.merge();
+        final JsonArray actual = changed.done();
         final JsonArray expected = Json.createArrayBuilder().add(v).build();
 
         assertEquals(expected, actual);
@@ -198,12 +198,12 @@ public class MutableArrayBuilderAddTest {
         /*
          * when add is invoked with the value
          */
-        this.builder.add(v);
+        final JAry<?, JsonArray> changed = this.builder.add(v);
 
         /*
          * the builder is mutated with the parameters
          */
-        final JsonArray actual = this.builder.merge();
+        final JsonArray actual = changed.done();
         final JsonArray expected = Json.createArrayBuilder().add(v).build();
 
         assertEquals(expected, actual);
@@ -221,12 +221,12 @@ public class MutableArrayBuilderAddTest {
         /*
          * when add null is invoked with the value
          */
-        this.builder.addNull();
+        final JAry<?, JsonArray> changed = this.builder.addNull();
 
         /*
          * the builder is mutated with the parameters
          */
-        final JsonArray actual = this.builder.merge();
+        final JsonArray actual = changed.done();
         final JsonArray expected = Json.createArrayBuilder().addNull().build();
 
         assertEquals(expected, actual);
@@ -245,12 +245,12 @@ public class MutableArrayBuilderAddTest {
         /*
          * when add is invoked with the value
          */
-        this.builder.add(v);
+        final JAry<?, JsonArray> changed = this.builder.add(v);
 
         /*
          * the builder is mutated with the parameters
          */
-        final JsonArray actual = this.builder.merge();
+        final JsonArray actual = changed.done();
         final JsonArray expected = Json.createArrayBuilder().add(v).build();
 
         assertEquals(expected, actual);
@@ -264,19 +264,19 @@ public class MutableArrayBuilderAddTest {
          * given a builder with values and a completed json array
          */
         // SETUP
-        this.builder.add("A").add("B");
+        final JAry<JsonArray, JsonArray> b1 = this.builder.add("A").add("B");
         final JsonArray addl = Json.createArrayBuilder().add("C").add("D")
                 .build();
 
         /*
          * when append is invoked
          */
-        this.builder.concat(addl);
+        final JAry<?, JsonArray> b2 = b1.concat(addl);
 
         /*
          * the additional values are appended to the resulting array
          */
-        final JsonArray actual = this.builder.merge();
+        final JsonArray actual = b2.done();
         final JsonArray expected = Json.createArrayBuilder().add("A").add("B")
                 .add("C").add("D").build();
         assertEquals(expected, actual);
