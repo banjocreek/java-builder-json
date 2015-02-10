@@ -64,6 +64,36 @@ public class ImmutableObjectBuilderSetTest {
     }
 
     @Test
+    public void testUpdateArray() {
+
+        /*
+         * given a key and builder with a json array value for the key
+         */
+        final String k = "Key";
+        final JObj<?, JsonObject> b1 = this.builder.set(k, Json
+                .createArrayBuilder().add("A").add("B").build());
+
+        /*
+         * when update is invoked with an array
+         */
+        final JObj<?, JsonObject> b2 = b1.update(k, Json.createArrayBuilder()
+                .add("C").add("D").build());
+
+        /*
+         * the builder produces an instance with the combined values at the key,
+         * the second after the first.
+         */
+        final JsonObject actual = b2.done();
+        final JsonObject expected = Json
+                .createObjectBuilder()
+                .add(k,
+                        Json.createArrayBuilder().add("A").add("B").add("C")
+                                .add("D").build()).build();
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
     public void testUpdateObject() {
 
         /*
