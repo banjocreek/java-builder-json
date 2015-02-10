@@ -96,9 +96,8 @@ final class MutableJsonArrayBuilder<P> extends
 
     @Override
     public JAry<P> clear() {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        doClear();
+        return this;
     }
 
     @Override

@@ -98,9 +98,7 @@ public class ImmutableJsonArrayBuilder<R, P> extends
 
     @Override
     public JAry<R, P> clear() {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new ImmutableJsonArrayBuilder<>(this, genClear());
     }
 
     @Override

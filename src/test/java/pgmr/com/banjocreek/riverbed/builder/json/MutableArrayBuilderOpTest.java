@@ -258,6 +258,26 @@ public class MutableArrayBuilderOpTest {
     }
 
     @Test
+    public void testClear() {
+
+        /*
+         * given a builder with values.
+         */
+        // SETUP
+        this.builder.add("A").add(123L);
+
+        /*
+         * when clear is invoked
+         */
+        this.builder.clear();
+
+        /*
+         * the builder will produce and empty instance
+         */
+        assertTrue(this.builder.merge().isEmpty());
+    }
+
+    @Test
     public void testConcat() {
 
         /*

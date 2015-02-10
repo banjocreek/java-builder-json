@@ -258,6 +258,26 @@ public class ImmutableArrayBuilderOpTest {
     }
 
     @Test
+    public void testClear() {
+
+        /*
+         * given a builder with values.
+         */
+        // SETUP
+        final JAry<?, JsonArray> b = this.builder.add("A").add(123L);
+
+        /*
+         * when clear is invoked
+         */
+        final JAry<?, JsonArray> b1 = b.clear();
+
+        /*
+         * the builder will produce and empty instance
+         */
+        assertTrue(b1.done().isEmpty());
+    }
+
+    @Test
     public void testConcat() {
 
         /*
