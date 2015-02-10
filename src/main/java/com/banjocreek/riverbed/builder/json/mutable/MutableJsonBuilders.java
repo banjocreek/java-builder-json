@@ -22,12 +22,25 @@ import java.util.function.Function;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 
+/**
+ * Factory for mutable JSON builders.
+ */
 public interface MutableJsonBuilders {
 
+    /**
+     * Create a new mutable JSON array builder.
+     *
+     * @return new builder.
+     */
     public static JAry<JsonArray> array() {
         return new MutableJsonArrayBuilder<>(Function.identity());
     }
 
+    /**
+     * Create a new mutable JSON object builder.
+     *
+     * @return new builder.
+     */
     public static JObj<JsonObject> object() {
         return new MutableJsonObjectBuilder<>(Function.identity());
     }
