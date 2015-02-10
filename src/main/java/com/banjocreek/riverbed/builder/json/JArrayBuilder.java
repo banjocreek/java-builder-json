@@ -33,6 +33,7 @@ import javax.json.JsonValue;
  * </p>
  *
  * @param <Z>
+ *            actual builder type
  */
 public interface JArrayBuilder<Z extends JArrayBuilder<Z>> {
 
