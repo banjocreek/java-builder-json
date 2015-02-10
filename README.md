@@ -23,8 +23,11 @@ This module provides an alternative API for building JSON
 structures by addressing the difficulties above and:
 
 * Supporting immutable and mutable builder semantics.
-* Augmentation of previously-specified paths.
-* Augmentation of existing JSON objects.
+* Continuation of previously-specified path.
+* Enhancement of previously-specified path.
+* Default object value.
+* Array concatenation.
+
 
 # Implementation
 
