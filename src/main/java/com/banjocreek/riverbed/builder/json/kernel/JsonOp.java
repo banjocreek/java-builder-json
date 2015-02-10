@@ -17,6 +17,8 @@
  */
 package com.banjocreek.riverbed.builder.json.kernel;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
@@ -67,12 +69,40 @@ public interface JsonOp {
 
     }
 
+    static JsonOp of(final BigDecimal value) {
+        return new BigDecimalOp(value);
+    }
+
+    static JsonOp of(final BigInteger value) {
+        return new BigIntegerOp(value);
+    }
+
+    static JsonOp of(final boolean value) {
+        return new BooleanOp(value);
+    }
+
+    static JsonOp of(final double value) {
+        return new BigDecimalOp(value);
+    }
+
+    static JsonOp of(final int value) {
+        return new BigIntegerOp(value);
+    }
+
     static JsonOp of(final JsonValue value) {
         return new JsonValueOp(value);
     }
 
+    static JsonOp of(final long value) {
+        return new BigIntegerOp(value);
+    }
+
     static JsonOp of(final String value) {
         return new StringOp(value);
+    }
+
+    static JsonOp ofNull() {
+        return new NullOp();
     }
 
     void apply(JsonArrayBuilder jbuf);

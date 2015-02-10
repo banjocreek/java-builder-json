@@ -78,37 +78,32 @@ final class ImmutableJsonObjectBuilder<R, P> extends
 
     @Override
     public JObj<R, P> set(final String name, final BigDecimal value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new ImmutableJsonObjectBuilder<>(this, values(name,
+                JsonOp.of(value)));
     }
 
     @Override
     public JObj<R, P> set(final String name, final BigInteger value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new ImmutableJsonObjectBuilder<>(this, values(name,
+                JsonOp.of(value)));
     }
 
     @Override
     public JObj<R, P> set(final String name, final boolean value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new ImmutableJsonObjectBuilder<>(this, values(name,
+                JsonOp.of(value)));
     }
 
     @Override
     public JObj<R, P> set(final String name, final double value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new ImmutableJsonObjectBuilder<>(this, values(name,
+                JsonOp.of(value)));
     }
 
     @Override
     public JObj<R, P> set(final String name, final int value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new ImmutableJsonObjectBuilder<>(this, values(name,
+                JsonOp.of(value)));
     }
 
     @Override
@@ -119,9 +114,8 @@ final class ImmutableJsonObjectBuilder<R, P> extends
 
     @Override
     public JObj<R, P> set(final String name, final long value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new ImmutableJsonObjectBuilder<>(this, values(name,
+                JsonOp.of(value)));
     }
 
     @Override
@@ -132,9 +126,8 @@ final class ImmutableJsonObjectBuilder<R, P> extends
 
     @Override
     public JObj<R, P> setNull(final String name) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new ImmutableJsonObjectBuilder<>(this, values(name,
+                JsonOp.ofNull()));
     }
 
     @Override

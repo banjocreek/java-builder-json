@@ -17,47 +17,15 @@
  */
 package com.banjocreek.riverbed.builder.json.kernel;
 
-import java.util.Objects;
-
-import javax.json.Json;
-import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
-import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
-import javax.json.JsonValue;
 
-final class JsonValueOp implements JsonOp {
+final class BooleanOp implements JsonOp {
 
-    private final JsonValue value;
+    private final boolean value;
 
-    public JsonValueOp(final JsonValue value) {
-        this.value = Objects.requireNonNull(value);
-    }
-
-    public JsonValueOp(final JsonValueOp origOp, final JsonArray ovr) {
-
-        final JsonArrayBuilder buf = Json.createArrayBuilder();
-
-        if (origOp.value instanceof JsonArray) {
-            ((JsonArray) origOp.value).forEach(buf::add);
-        }
-        ovr.forEach(buf::add);
-
-        this.value = buf.build();
-
-    }
-
-    public JsonValueOp(final JsonValueOp origOp, final JsonObject ovr) {
-
-        final JsonObjectBuilder buf = Json.createObjectBuilder();
-
-        if (origOp.value instanceof JsonObject) {
-            ((JsonObject) origOp.value).forEach(buf::add);
-        }
-        ovr.forEach(buf::add);
-
-        this.value = buf.build();
-
+    public BooleanOp(final boolean value) {
+        this.value = value;
     }
 
     @Override
@@ -69,5 +37,4 @@ final class JsonValueOp implements JsonOp {
     public void apply(final String key, final JsonObjectBuilder jbuf) {
         jbuf.add(key, this.value);
     }
-
 }

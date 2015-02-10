@@ -19,8 +19,12 @@ package pgmr.com.banjocreek.riverbed.builder.json;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 import javax.json.Json;
 import javax.json.JsonObject;
+import javax.json.JsonValue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,6 +39,214 @@ public class MutableObjectBuilderSetTest {
     @Before
     public void setup() {
         this.builder = MutableJsonBuilders.object();
+    }
+
+    @Test
+    public void testSetBigDecimal() {
+
+        /*
+         * given a builder, a key, and a value
+         */
+        // SETUP
+        final String k = "Key";
+        final BigDecimal v = BigDecimal.valueOf(101.3);
+
+        /*
+         * when set is invoked with the key and value
+         */
+        this.builder.set(k, v);
+
+        /*
+         * the builder is mutated with the parameters
+         */
+        final JsonObject actual = this.builder.merge();
+        final JsonObject expected = Json.createObjectBuilder().add(k, v)
+                .build();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testSetBigInteger() {
+
+        /*
+         * given a builder, a key, and a value
+         */
+        // SETUP
+        final String k = "Key";
+        final BigInteger v = BigInteger.valueOf(101010L);
+
+        /*
+         * when set is invoked with the key and value
+         */
+        this.builder.set(k, v);
+
+        /*
+         * the builder is mutated with the parameters
+         */
+        final JsonObject actual = this.builder.merge();
+        final JsonObject expected = Json.createObjectBuilder().add(k, v)
+                .build();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testSetBoolean() {
+
+        /*
+         * given a builder, a key, and a value
+         */
+        // SETUP
+        final String k = "Key";
+        final boolean v = true;
+
+        /*
+         * when set is invoked with the key and value
+         */
+        this.builder.set(k, v);
+
+        /*
+         * the builder is mutated with the parameters
+         */
+        final JsonObject actual = this.builder.merge();
+        final JsonObject expected = Json.createObjectBuilder().add(k, v)
+                .build();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testSetDouble() {
+
+        /*
+         * given a builder, a key, and a value
+         */
+        // SETUP
+        final String k = "Key";
+        final double v = 10101.1;
+
+        /*
+         * when set is invoked with the key and value
+         */
+        this.builder.set(k, v);
+
+        /*
+         * the builder is mutated with the parameters
+         */
+        final JsonObject actual = this.builder.merge();
+        final JsonObject expected = Json.createObjectBuilder().add(k, v)
+                .build();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testSetInteger() {
+
+        /*
+         * given a builder, a key, and a value
+         */
+        // SETUP
+        final String k = "Key";
+        final int v = 10101;
+
+        /*
+         * when set is invoked with the key and value
+         */
+        this.builder.set(k, v);
+
+        /*
+         * the builder is mutated with the parameters
+         */
+        final JsonObject actual = this.builder.merge();
+        final JsonObject expected = Json.createObjectBuilder().add(k, v)
+                .build();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testSetJsonValue() {
+
+        /*
+         * given a builder, a key, and a value
+         */
+        // SETUP
+        final String k = "Key";
+        final JsonValue v = Json.createObjectBuilder().add("key", 12).build()
+                .get("key");
+
+        /*
+         * when set is invoked with the key and value
+         */
+        this.builder.set(k, v);
+
+        /*
+         * the builder is mutated with the parameters
+         */
+        final JsonObject actual = this.builder.merge();
+        final JsonObject expected = Json.createObjectBuilder().add(k, v)
+                .build();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testSetLong() {
+
+        /*
+         * given a builder, a key, and a value
+         */
+        // SETUP
+        final String k = "Key";
+        final long v = 10101l;
+
+        /*
+         * when set is invoked with the key and value
+         */
+        this.builder.set(k, v);
+
+        /*
+         * the builder is mutated with the parameters
+         */
+        final JsonObject actual = this.builder.merge();
+        final JsonObject expected = Json.createObjectBuilder().add(k, v)
+                .build();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testSetNull() {
+
+        /*
+         * given a builder and a key
+         */
+        // SETUP
+        final String k = "Key";
+
+        /*
+         * when set null is invoked with the key and value
+         */
+        this.builder.setNull(k);
+
+        /*
+         * the builder is mutated with the parameters
+         */
+        final JsonObject actual = this.builder.merge();
+        final JsonObject expected = Json.createObjectBuilder().addNull(k)
+                .build();
+
+        assertEquals(expected, actual);
+
     }
 
     @Test

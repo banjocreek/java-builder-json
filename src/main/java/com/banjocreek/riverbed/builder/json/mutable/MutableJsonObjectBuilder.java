@@ -65,37 +65,32 @@ final class MutableJsonObjectBuilder<P> extends
 
     @Override
     public JObj<P> set(final String name, final BigDecimal value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        values(name, JsonOp.of(value));
+        return this;
     }
 
     @Override
     public JObj<P> set(final String name, final BigInteger value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        values(name, JsonOp.of(value));
+        return this;
     }
 
     @Override
     public JObj<P> set(final String name, final boolean value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        values(name, JsonOp.of(value));
+        return this;
     }
 
     @Override
     public JObj<P> set(final String name, final double value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        values(name, JsonOp.of(value));
+        return this;
     }
 
     @Override
     public JObj<P> set(final String name, final int value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        values(name, JsonOp.of(value));
+        return this;
     }
 
     @Override
@@ -106,9 +101,8 @@ final class MutableJsonObjectBuilder<P> extends
 
     @Override
     public JObj<P> set(final String name, final long value) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        values(name, JsonOp.of(value));
+        return this;
     }
 
     @Override
@@ -119,9 +113,8 @@ final class MutableJsonObjectBuilder<P> extends
 
     @Override
     public JObj<P> setNull(final String name) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        values(name, JsonOp.ofNull());
+        return this;
     }
 
     @Override
