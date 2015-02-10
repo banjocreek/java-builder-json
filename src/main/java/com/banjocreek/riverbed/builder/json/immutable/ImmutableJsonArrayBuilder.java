@@ -19,77 +19,75 @@ package com.banjocreek.riverbed.builder.json.immutable;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
 
 import javax.json.JsonArray;
 import javax.json.JsonValue;
 
-import com.banjocreek.riverbed.builder.AbstractImmutableBuilder;
 import com.banjocreek.riverbed.builder.json.kernel.JsonOp;
+import com.banjocreek.riverbed.builder.list.AbstractImmutableListBuilder;
 
 public class ImmutableJsonArrayBuilder<R, P> extends
-        AbstractImmutableBuilder<List<JsonOp>, JsonOp, R, P> implements
-        JAry<R, P> {
+        AbstractImmutableListBuilder<JsonOp, R, P> implements JAry<R, P> {
 
     ImmutableJsonArrayBuilder(final Function<JsonArray, R> rootConstructor,
             final Function<JsonArray, P> parentConstructor) {
-        super(ArrayList::new, (l, e) -> {
-            l.add(e);
-            return l;
-        }, l -> rootConstructor.apply(JsonOp.buildArray(l)),
+        super(l -> rootConstructor.apply(JsonOp.buildArray(l)),
                 l -> parentConstructor.apply(JsonOp.buildArray(l)));
     }
 
     private ImmutableJsonArrayBuilder(
-            final ImmutableJsonArrayBuilder<R, P> previous, final JsonOp delta) {
+            final ImmutableJsonArrayBuilder<R, P> previous,
+            final UnaryOperator<List<JsonOp>> delta) {
         super(previous, delta);
     }
 
     @Override
     public JAry<R, P> add(final BigDecimal value) {
-        return new ImmutableJsonArrayBuilder<>(this, JsonOp.of(value));
+        return new ImmutableJsonArrayBuilder<>(this, genAdd(JsonOp.of(value)));
     }
 
     @Override
     public JAry<R, P> add(final BigInteger value) {
-        return new ImmutableJsonArrayBuilder<>(this, JsonOp.of(value));
+        return new ImmutableJsonArrayBuilder<>(this, genAdd(JsonOp.of(value)));
     }
 
     @Override
     public JAry<R, P> add(final boolean value) {
-        return new ImmutableJsonArrayBuilder<>(this, JsonOp.of(value));
+        return new ImmutableJsonArrayBuilder<>(this, genAdd(JsonOp.of(value)));
     }
 
     @Override
     public JAry<R, P> add(final double value) {
-        return new ImmutableJsonArrayBuilder<>(this, JsonOp.of(value));
+        return new ImmutableJsonArrayBuilder<>(this, genAdd(JsonOp.of(value)));
     }
 
     @Override
     public JAry<R, P> add(final int value) {
-        return new ImmutableJsonArrayBuilder<>(this, JsonOp.of(value));
+        return new ImmutableJsonArrayBuilder<>(this, genAdd(JsonOp.of(value)));
     }
 
     @Override
     public JAry<R, P> add(final JsonValue value) {
-        return new ImmutableJsonArrayBuilder<>(this, JsonOp.of(value));
+        return new ImmutableJsonArrayBuilder<>(this, genAdd(JsonOp.of(value)));
     }
 
     @Override
     public JAry<R, P> add(final long value) {
-        return new ImmutableJsonArrayBuilder<>(this, JsonOp.of(value));
+        return new ImmutableJsonArrayBuilder<>(this, genAdd(JsonOp.of(value)));
     }
 
     @Override
     public JAry<R, P> add(final String value) {
-        return new ImmutableJsonArrayBuilder<>(this, JsonOp.of(value));
+        return new ImmutableJsonArrayBuilder<>(this, genAdd(JsonOp.of(value)));
     }
 
     @Override
     public JAry<R, P> addNull() {
-        return new ImmutableJsonArrayBuilder<>(this, JsonOp.ofNull());
+        return new ImmutableJsonArrayBuilder<>(this, genAdd(JsonOp.ofNull()));
     }
 
     @Override
@@ -108,7 +106,8 @@ public class ImmutableJsonArrayBuilder<R, P> extends
     @Override
     public JAry<R, P> concat(final JsonArray jary) {
 
-        return new ImmutableJsonArrayBuilder<>(this, JsonOp.ofFlat(jary));
+        return new ImmutableJsonArrayBuilder<>(this, genAddAll(jary.stream()
+                .map(JsonOp::of).collect(Collectors.toList())));
     }
 
     @Override

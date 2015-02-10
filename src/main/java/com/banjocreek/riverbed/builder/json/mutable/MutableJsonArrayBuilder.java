@@ -19,77 +19,73 @@ package com.banjocreek.riverbed.builder.json.mutable;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import javax.json.JsonArray;
 import javax.json.JsonValue;
 
-import com.banjocreek.riverbed.builder.AbstractMutableBuilder;
 import com.banjocreek.riverbed.builder.json.kernel.JsonOp;
+import com.banjocreek.riverbed.builder.list.AbstractMutableListBuilder;
 
 final class MutableJsonArrayBuilder<P> extends
-        AbstractMutableBuilder<List<JsonOp>, JsonOp, P> implements JAry<P> {
+        AbstractMutableListBuilder<JsonOp, P> implements JAry<P> {
 
     protected MutableJsonArrayBuilder(final Function<JsonArray, P> constructor) {
-        super(ArrayList::new, (l, e) -> {
-            l.add(e);
-            return l;
-        }, l -> constructor.apply(JsonOp.buildArray(l)));
+        super(l -> constructor.apply(JsonOp.buildArray(l)));
     }
 
     @Override
     public JAry<P> add(final BigDecimal value) {
-        apply(JsonOp.of(value));
+        doAdd(JsonOp.of(value));
         return this;
     }
 
     @Override
     public JAry<P> add(final BigInteger value) {
-        apply(JsonOp.of(value));
+        doAdd(JsonOp.of(value));
         return this;
     }
 
     @Override
     public JAry<P> add(final boolean value) {
-        apply(JsonOp.of(value));
+        doAdd(JsonOp.of(value));
         return this;
     }
 
     @Override
     public JAry<P> add(final double value) {
-        apply(JsonOp.of(value));
+        doAdd(JsonOp.of(value));
         return this;
     }
 
     @Override
     public JAry<P> add(final int value) {
-        apply(JsonOp.of(value));
+        doAdd(JsonOp.of(value));
         return this;
     }
 
     @Override
     public JAry<P> add(final JsonValue value) {
-        apply(JsonOp.of(value));
+        doAdd(JsonOp.of(value));
         return this;
     }
 
     @Override
     public JAry<P> add(final long value) {
-        apply(JsonOp.of(value));
+        doAdd(JsonOp.of(value));
         return this;
     }
 
     @Override
     public JAry<P> add(final String value) {
-        apply(JsonOp.of(value));
+        doAdd(JsonOp.of(value));
         return this;
     }
 
     @Override
     public JAry<P> addNull() {
-        apply(JsonOp.ofNull());
+        doAdd(JsonOp.ofNull());
         return this;
     }
 
@@ -107,7 +103,7 @@ final class MutableJsonArrayBuilder<P> extends
 
     @Override
     public JAry<P> concat(final JsonArray jary) {
-        jary.stream().map(JsonOp::of).forEach(this::apply);
+        doAddAll(jary.stream().map(JsonOp::of).collect(Collectors.toList()));
         return this;
     }
 
