@@ -22,6 +22,12 @@ import com.banjocreek.riverbed.builder.json.JObjectBuilder;
 
 public interface JObj<P> extends JObjectBuilder<JObj<P>>, MutableBuilder<P> {
 
+    /**
+     * Nest an array. This initializes a new builder whose array will be set in
+     * this builder at the given key when it is completed.
+     *
+     * @return nested array builder.
+     */
     JAry<JObj<P>> array(String name);
 
     /**
@@ -48,5 +54,11 @@ public interface JObj<P> extends JObjectBuilder<JObj<P>>, MutableBuilder<P> {
      */
     JObj<JObj<P>> continueObject(String name);
 
+    /**
+     * Nest an object. This initializes a new builder whose builder will be set
+     * in this builder at the given key when it is completed.
+     *
+     * @return nested object builder.
+     */
     JObj<JObj<P>> object(String name);
 }
