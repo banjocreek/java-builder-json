@@ -57,9 +57,7 @@ final class MutableJsonObjectBuilder<P> extends
 
     @Override
     public JObj<JObj<P>> continueObject(final String name) {
-        // TODO Auto-generated method stub
-        // return null;
-        throw new UnsupportedOperationException("NYI");
+        return new MutableJsonObjectBuilder<>(jobj -> update(name, jobj));
     }
 
     @Override
@@ -148,6 +146,11 @@ final class MutableJsonObjectBuilder<P> extends
         // TODO Auto-generated method stub
         // return null;
         throw new UnsupportedOperationException("NYI");
+    }
+
+    private JObj<P> update(final String key, final JsonObject jobj) {
+        updates(key, jop -> JsonOp.combine(jop, jobj));
+        return this;
     }
 
 }
