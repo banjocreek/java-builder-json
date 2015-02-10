@@ -25,6 +25,30 @@ public interface JObj<R, P> extends JObjectBuilder<JObj<R, P>>,
 
     JAry<R, JObj<R, P>> array(String name);
 
+    /**
+     * Nest an array. If one has already been started at the given path, the
+     * builder continues to operate on it. Otherwise, a new array is operated
+     * upon as with {@link #array(String)}.
+     *
+     * @param name
+     *            key of the array in the current builder.
+     *
+     * @return builder for nested array.
+     */
+    JAry<R, JObj<R, P>> continueArray(String name);
+
+    /**
+     * Nest an object. If one has already been started at the given path, the
+     * builder continues to operate on it. Otherwise a new object is operated
+     * upon as with {@link #object(String)}.
+     *
+     * @param name
+     *            key of the object in the current builder.
+     *
+     * @return builder for nested object.
+     */
+    JObj<R, JObj<R, P>> continueObject(String name);
+
     JObj<R, JObj<R, P>> object(String name);
 
 }

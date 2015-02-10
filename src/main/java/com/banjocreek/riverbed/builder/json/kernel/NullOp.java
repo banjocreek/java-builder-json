@@ -15,36 +15,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.banjocreek.riverbed.builder.json;
+package com.banjocreek.riverbed.builder.json.kernel;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 
-import javax.json.JsonArray;
-import javax.json.JsonValue;
+final class NullOp implements JsonOp {
 
-public interface JArrayBuilder<Z extends JArrayBuilder<Z>> {
+    @Override
+    public void apply(final JsonArrayBuilder jbuf) {
+        jbuf.addNull();
+    }
 
-    public Z add(final BigDecimal value);
-
-    public Z add(final BigInteger value);
-
-    public Z add(final boolean value);
-
-    public Z add(final double value);
-
-    public Z add(final int value);
-
-    public Z add(final JsonValue value);
-
-    public Z add(final long value);
-
-    public Z add(final String value);
-
-    public Z addNull();
-
-    public Z clear();
-
-    public Z concat(JsonArray jary);
-
+    @Override
+    public void apply(final String key, final JsonObjectBuilder jbuf) {
+        jbuf.addNull(key);
+    }
 }

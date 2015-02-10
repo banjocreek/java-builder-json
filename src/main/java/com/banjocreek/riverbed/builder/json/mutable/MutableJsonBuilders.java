@@ -15,36 +15,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.banjocreek.riverbed.builder.json;
+package com.banjocreek.riverbed.builder.json.mutable;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.util.function.Function;
 
 import javax.json.JsonArray;
-import javax.json.JsonValue;
+import javax.json.JsonObject;
 
-public interface JArrayBuilder<Z extends JArrayBuilder<Z>> {
+public interface MutableJsonBuilders {
 
-    public Z add(final BigDecimal value);
+    public static JAry<JsonArray> array() {
+        return new MutableJsonArrayBuilder<>(Function.identity());
+    }
 
-    public Z add(final BigInteger value);
-
-    public Z add(final boolean value);
-
-    public Z add(final double value);
-
-    public Z add(final int value);
-
-    public Z add(final JsonValue value);
-
-    public Z add(final long value);
-
-    public Z add(final String value);
-
-    public Z addNull();
-
-    public Z clear();
-
-    public Z concat(JsonArray jary);
+    public static JObj<JsonObject> object() {
+        return new MutableJsonObjectBuilder<>(Function.identity());
+    }
 
 }

@@ -20,12 +20,17 @@ package com.banjocreek.riverbed.builder.json;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonValue;
 
 public interface JObjectBuilder<Z extends JObjectBuilder<Z>> {
 
     public Z clear();
+
+    public Z remove(String name);
+
+    public Z reset();
 
     public Z set(final String name, final BigDecimal value);
 
@@ -45,10 +50,12 @@ public interface JObjectBuilder<Z extends JObjectBuilder<Z>> {
 
     public Z setNull(final String name);
 
-    public Z unset(String name);
+    public Z update(final String name, final JsonArray with);
+
+    public Z update(final String name, final JsonObject with);
 
     public Z withDefault(JsonObject jobj);
 
-    public Z withValues(JsonObject jobj);
+    public Z withValue(JsonObject jobj);
 
 }

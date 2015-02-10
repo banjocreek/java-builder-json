@@ -15,36 +15,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.banjocreek.riverbed.builder.json;
+package com.banjocreek.riverbed.builder.json.kernel;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Objects;
 
-import javax.json.JsonArray;
-import javax.json.JsonValue;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 
-public interface JArrayBuilder<Z extends JArrayBuilder<Z>> {
+final class BigIntegerOp implements JsonOp {
 
-    public Z add(final BigDecimal value);
+    private final BigInteger value;
 
-    public Z add(final BigInteger value);
+    public BigIntegerOp(final BigInteger value) {
+        this.value = Objects.requireNonNull(value);
+    }
 
-    public Z add(final boolean value);
+    public BigIntegerOp(final int value) {
+        this.value = BigInteger.valueOf(value);
+    }
 
-    public Z add(final double value);
+    public BigIntegerOp(final long value) {
+        this.value = BigInteger.valueOf(value);
+    }
 
-    public Z add(final int value);
+    @Override
+    public void apply(final JsonArrayBuilder jbuf) {
+        jbuf.add(this.value);
+    }
 
-    public Z add(final JsonValue value);
-
-    public Z add(final long value);
-
-    public Z add(final String value);
-
-    public Z addNull();
-
-    public Z clear();
-
-    public Z concat(JsonArray jary);
-
+    @Override
+    public void apply(final String key, final JsonObjectBuilder jbuf) {
+        jbuf.add(key, this.value);
+    }
 }
