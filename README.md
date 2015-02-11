@@ -52,14 +52,14 @@ final JsonObject jobj = ImmutableJsonBuilders.object()
 .build();
 
 final JsonObject expected = Json.createObjectBuilder()
-    .add("Name", Json.createArrayBuilder()
+    .add("Name", "Carl P. Thornton")
+    .add("Aliases", Json.createArrayBuilder()
         .add("Jonathan H. Thornberg")
         .add("Harry Q. Bovik")
         .build())
 .build();
 
 assert Objects.equals(expected, jobj);
-
 ```
 
 ## Object Defaults

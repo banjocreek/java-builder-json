@@ -25,7 +25,7 @@ import javax.json.JsonObject;
 
 import com.banjocreek.riverbed.builder.json.immutable.ImmutableJsonBuilders;
 
-public enum Sample implements Runnable {
+public enum Example implements Runnable {
 
     INTRO_OBJ {
         @Override
@@ -40,7 +40,8 @@ final JsonObject jobj = ImmutableJsonBuilders.object()
 .build();
 
 final JsonObject expected = Json.createObjectBuilder()
-    .add("Name", Json.createArrayBuilder()
+    .add("Name", "Carl P. Thornton")
+    .add("Aliases", Json.createArrayBuilder()
         .add("Jonathan H. Thornberg")
         .add("Harry Q. Bovik")
         .build())
