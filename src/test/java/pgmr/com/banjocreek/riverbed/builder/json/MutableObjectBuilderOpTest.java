@@ -144,6 +144,79 @@ public class MutableObjectBuilderOpTest {
 
     }
 
+    @Test public void testRemoveFromDefault() {
+        /*
+        given builder with default
+         */
+        final JsonObject deflt = Json.createObjectBuilder().add("key1","value1").add("key2","value2").build();
+        builder.withDefault(deflt);
+
+        /*
+        when key is removed
+         */
+        builder.remove("key1");
+
+
+        /*
+        it will produce a json object with the removed key missing
+         */
+        JsonObject expected = Json.createObjectBuilder().add("key2","value2").build();
+        assertEquals(expected, builder.merge());
+
+    }
+
+
+    @Test public void testRemoveFromDefaultAndEnhanced() {
+
+        /*
+        given builder with default and a new key set
+         */
+        final JsonObject deflt = Json.createObjectBuilder().add("key1","value1").add("key2","value2").build();
+        builder.withDefault(deflt).set("kextra", "vextra");
+
+        /*
+        when key is removed
+         */
+        builder.remove("key1");
+
+
+        /*
+        it will produce a json object with the removed key missing
+         */
+        JsonObject expected = Json.createObjectBuilder().add("key2", "value2").add("kextra","vextra").build();
+        assertEquals(expected, builder.merge());
+
+    }
+
+
+    @Test
+    public void testRemoveFromDefaultNestedAndEnhanced() {
+
+        /*
+        given builder with default and a new key set
+         */
+        final JsonObject deflt = Json.createObjectBuilder()
+                .add("nested", Json.createObjectBuilder().add("key1", "value1").add("key2", "value2")).build();
+        builder.withDefault(deflt).continueObject("nested").set("kextra","vextra").merge();
+
+        /*
+        when key is removed
+         */
+        builder.continueObject("nested").remove("key1").merge();
+
+
+        /*
+        it will produce a json object with the removed key missing
+         */
+        JsonObject expected = Json.createObjectBuilder()
+                .add("nested", Json.createObjectBuilder().add("kextra","vextra").add("key2", "value2")).build();
+
+        assertEquals(expected, builder.merge());
+
+
+    }
+
+
     @Test
     public void testReset() {
 
