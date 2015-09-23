@@ -158,4 +158,32 @@ public class MutableObjectBuilderNestTest {
 
     }
 
+    @Test
+    public void testRemoveFromDefaultNestedAndEnhanced() {
+
+        /*
+        given builder with default and a new key set
+         */
+        final JsonObject deflt = Json.createObjectBuilder()
+                .add("nested", Json.createObjectBuilder().add("key1", "value1").add("key2", "value2")).build();
+        builder.withDefault(deflt).continueObject("nested").set("kextra","vextra").merge();
+
+        /*
+        when key is removed
+         */
+        builder.continueObject("nested").remove("key1");
+
+
+        /*
+        it will produce a json object with the removed key missing
+         */
+        JsonObject expected = Json.createObjectBuilder()
+                .add("nested", Json.createObjectBuilder().add("kextra","vextra").add("key2", "value2")).build();
+
+        assertEquals(expected, builder.merge());
+
+
+    }
+
+
 }
