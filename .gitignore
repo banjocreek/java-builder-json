@@ -17,6 +17,8 @@ target/
 
 # idea intellij
 bin/
+.idea/
+*.iml
 
 # macintosh
 .DS_Store
@@ -24,4 +26,7 @@ bin/
 
 #editor litter
 *~
+
+
+
 
